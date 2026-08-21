@@ -16,9 +16,9 @@ function printHelp(): void {
   console.log(`venglyph — VenGlyph control plane CLI
 
 Usage:
-  venglyph hub server              Start the hub HTTP server
-  venglyph hub chat [text]         Chat via SSE (M1)
-  venglyph hub worker              Connect local worker (M1)
+  venglyph hub server              Start the hub HTTP + worker WS
+  venglyph hub chat [text]         Chat via SSE (--workspace)
+  venglyph hub worker              Connect local worker (--workspace)
 
 Env: see .env.example
 `);

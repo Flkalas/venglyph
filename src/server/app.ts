@@ -1,6 +1,13 @@
 import { Hono } from "hono";
 import type { HubStore } from "./store.js";
 import { storeHealth } from "./store.js";
+import type { WorkerRegistry } from "./workers.js";
+import type { ConfirmGate } from "./confirm.js";
+import { sessionsRoutes } from "./routes/sessions.js";
+import { recordsRoutes } from "./routes/records.js";
+import { workersRoutes } from "./routes/workers.js";
+import { chatRoutes } from "./routes/chat.js";
+import { approveRoutes } from "./routes/approve.js";
 
 export type AppEnv = {
   Variables: {
@@ -10,7 +17,8 @@ export type AppEnv = {
 
 export type CreateAppOptions = {
   store: HubStore;
-  getWorkersOnline?: () => number;
+  workers: WorkerRegistry;
+  confirm: ConfirmGate;
 };
 
 export function createApp(opts: CreateAppOptions): Hono<AppEnv> {
@@ -26,9 +34,15 @@ export function createApp(opts: CreateAppOptions): Hono<AppEnv> {
     return c.json({
       ok: true,
       store: health,
-      workers: opts.getWorkersOnline?.() ?? 0,
+      workers: opts.workers.onlineCount(),
     });
   });
+
+  app.route("/v1/hub/sessions", sessionsRoutes());
+  app.route("/v1/hub/records", recordsRoutes());
+  app.route("/v1/hub/workers", workersRoutes(opts.workers));
+  app.route("/v1/hub/chat", chatRoutes(opts.workers, opts.confirm));
+  app.route("/v1/hub/approve", approveRoutes(opts.confirm));
 
   return app;
 }
