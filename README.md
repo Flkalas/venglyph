@@ -33,8 +33,8 @@ pnpm install
 copy .env.example .env   # 필요 시 수정
 pnpm dev:hub             # http://127.0.0.1:8787
 # 다른 터미널
-pnpm exec venglyph hub worker --workspace .
-pnpm exec venglyph hub chat "README 첫 줄 알려줘"
+pnpm exec tsx src/cli.ts hub worker --workspace .
+pnpm exec tsx src/cli.ts hub chat "README 첫 줄 알려줘"
 ```
 
 | 스크립트 | 역할 |
