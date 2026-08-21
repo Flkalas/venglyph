@@ -1,0 +1,1310 @@
+{
+  "meta": {
+    "collected_at": "2026-08-06",
+    "benchmarks": [
+      "swe_pro",
+      "terminal_bench_2",
+      "browsecomp"
+    ],
+    "labels": {
+      "swe_pro": "SWE-bench Pro",
+      "terminal_bench_2": "Terminal-Bench 2.0",
+      "browsecomp": "BrowseComp"
+    },
+    "n_models": 50,
+    "n_triple": 18,
+    "n_unmatched_benchlm": 20,
+    "assumptions": {
+      "blend": "(3*input + 1*output)/4 $/1M tokens",
+      "monthly_tokens": 300000000,
+      "io_ratio": "3:1",
+      "monthly_formula": "225*input$/1M + 75*output$/1M",
+      "pareto": "per-benchmark maximize score, minimize monthly cost",
+      "composite": "frontier_count / available_benches",
+      "joint": "non-dominated on (SWE-Pro\u2191, Terminal-Bench\u2191, BrowseComp\u2191, cost\u2193)",
+      "scores_source": "BenchLM models.json coding.swePro / terminalBench2 / agentic.browseComp",
+      "prices_source": "OpenRouter GET /api/v1/models",
+      "dedup": "multiple BenchLM effort variants \u2192 one OpenRouter id; keep highest mean score"
+    },
+    "sources": [
+      "https://benchlm.ai/data/models.json",
+      "https://openrouter.ai/api/v1/models"
+    ],
+    "caveats": [
+      "Many scores are provider-reported via BenchLM (evidenceStatus may be estimated).",
+      "Terminal-Bench / SWE-Pro harnesses differ across vendors; treat cross-model gaps cautiously.",
+      "Effort variants (max/high) share OpenRouter list price of the base SKU.",
+      "BrowseComp coverage is thinner than SWE-Pro / Terminal-Bench."
+    ]
+  },
+  "frontiers": {
+    "swe_pro": [
+      "anthropic/claude-opus-5",
+      "inclusionai/ling-3.0-flash",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-terra",
+      "poolside/laguna-s-2.1",
+      "qwen/qwen3.8-max"
+    ],
+    "terminal_bench_2": [
+      "deepseek/deepseek-v4-flash",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra",
+      "poolside/laguna-s-2.1",
+      "tencent/hy3-preview"
+    ],
+    "browsecomp": [
+      "anthropic/claude-opus-5",
+      "deepseek/deepseek-v4-flash",
+      "inclusionai/ling-3.0-flash",
+      "minimax/minimax-m3",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra"
+    ]
+  },
+  "unmatched_benchlm_sample": [
+    {
+      "slug": "claude-mythos-5",
+      "name": "Claude Mythos 5",
+      "creator": "Anthropic"
+    },
+    {
+      "slug": "kimi-3",
+      "name": "Kimi K3",
+      "creator": "Moonshot AI"
+    },
+    {
+      "slug": "claude-fable",
+      "name": "Claude Fable 5",
+      "creator": "Anthropic"
+    },
+    {
+      "slug": "qwen3-5-397b",
+      "name": "Qwen3.5 397B",
+      "creator": "Alibaba"
+    },
+    {
+      "slug": "nemotron-3-ultra",
+      "name": "Nemotron 3 Ultra",
+      "creator": "NVIDIA"
+    },
+    {
+      "slug": "mai-thinking-1",
+      "name": "MAI-Thinking-1",
+      "creator": "Microsoft"
+    },
+    {
+      "slug": "sakana-fugu-ultra",
+      "name": "Sakana Fugu-Ultra",
+      "creator": "Sakana AI"
+    },
+    {
+      "slug": "sakana-fugu",
+      "name": "Sakana Fugu",
+      "creator": "Sakana AI"
+    },
+    {
+      "slug": "swe-1-7",
+      "name": "SWE-1.7",
+      "creator": "Cognition"
+    },
+    {
+      "slug": "ornith-1-0-397b",
+      "name": "Ornith-1.0-397B",
+      "creator": "DeepReinforce AI"
+    },
+    {
+      "slug": "agents-a1",
+      "name": "Agents-A1",
+      "creator": "InternScience"
+    },
+    {
+      "slug": "composer-2-5",
+      "name": "Composer 2.5",
+      "creator": "Cursor"
+    },
+    {
+      "slug": "composer-2",
+      "name": "Composer 2",
+      "creator": "Cursor"
+    },
+    {
+      "slug": "muse-spark",
+      "name": "Muse Spark",
+      "creator": "Meta"
+    },
+    {
+      "slug": "kimi-k2-5-reasoning",
+      "name": "Kimi K2.5 (Reasoning)",
+      "creator": "Moonshot AI"
+    },
+    {
+      "slug": "ornith-1-0-35b",
+      "name": "Ornith-1.0-35B",
+      "creator": "DeepReinforce AI"
+    },
+    {
+      "slug": "grok-4-20-beta",
+      "name": "Grok 4.20",
+      "creator": "xAI"
+    },
+    {
+      "slug": "laguna-m-1",
+      "name": "Laguna M.1",
+      "creator": "Poolside"
+    },
+    {
+      "slug": "ornith-1-0-9b",
+      "name": "Ornith-1.0-9B",
+      "creator": "DeepReinforce AI"
+    },
+    {
+      "slug": "laguna-xs-2",
+      "name": "Laguna XS.2",
+      "creator": "Poolside"
+    }
+  ],
+  "models": [
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "OpenAI: GPT-5.6 Luna",
+      "benchlm_slug": "gpt-5-6-luna",
+      "benchlm_name": "GPT-5.6 Luna",
+      "scores": {
+        "swe_pro": 62.7,
+        "terminal_bench_2": 84.7,
+        "browsecomp": 83.3
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.1,
+      "output_per_m": 0.6,
+      "blend_per_m": 0.225,
+      "monthly_usd": 67.5,
+      "frontier_on": [
+        "swe_pro",
+        "terminal_bench_2",
+        "browsecomp"
+      ],
+      "frontier_count": 3,
+      "available_benches": 3,
+      "composite": 1.0,
+      "rank": 1,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "OpenAI: GPT-5.6 Terra",
+      "benchlm_slug": "gpt-5-6-terra",
+      "benchlm_name": "GPT-5.6 Terra",
+      "scores": {
+        "swe_pro": 63.4,
+        "terminal_bench_2": 87.4,
+        "browsecomp": 87.5
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 1.0,
+      "output_per_m": 6.0,
+      "blend_per_m": 2.25,
+      "monthly_usd": 675.0,
+      "frontier_on": [
+        "swe_pro",
+        "terminal_bench_2",
+        "browsecomp"
+      ],
+      "frontier_count": 3,
+      "available_benches": 3,
+      "composite": 1.0,
+      "rank": 2,
+      "map_note": null
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "name": "Ling-3.0-flash",
+      "benchlm_slug": "ling-3-0-flash",
+      "benchlm_name": "Ling 3.0 Flash",
+      "scores": {
+        "swe_pro": 56.6,
+        "browsecomp": 72.2
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.021,
+      "output_per_m": 0.063,
+      "blend_per_m": 0.0315,
+      "monthly_usd": 9.45,
+      "frontier_on": [
+        "swe_pro",
+        "browsecomp"
+      ],
+      "frontier_count": 2,
+      "available_benches": 2,
+      "composite": 1.0,
+      "rank": 3,
+      "map_note": null
+    },
+    {
+      "id": "poolside/laguna-s-2.1",
+      "name": "Poolside: Laguna S 2.1",
+      "benchlm_slug": "laguna-s-2-1",
+      "benchlm_name": "Laguna S 2.1",
+      "scores": {
+        "swe_pro": 59.4,
+        "terminal_bench_2": 70.2
+      },
+      "estimated": false,
+      "evidence_status": null,
+      "input_per_m": 0.09,
+      "output_per_m": 0.18,
+      "blend_per_m": 0.1125,
+      "monthly_usd": 33.75,
+      "frontier_on": [
+        "swe_pro",
+        "terminal_bench_2"
+      ],
+      "frontier_count": 2,
+      "available_benches": 2,
+      "composite": 1.0,
+      "rank": 4,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "Claude Opus 5",
+      "benchlm_slug": "claude-opus-5",
+      "benchlm_name": "Claude Opus 5",
+      "scores": {
+        "swe_pro": 79.2,
+        "browsecomp": 90.8
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "frontier_on": [
+        "swe_pro",
+        "browsecomp"
+      ],
+      "frontier_count": 2,
+      "available_benches": 2,
+      "composite": 1.0,
+      "rank": 5,
+      "map_note": null
+    },
+    {
+      "id": "tencent/hy3-preview",
+      "name": "Tencent: Hy3 preview",
+      "benchlm_slug": "hy3-preview",
+      "benchlm_name": "Hy3 Preview",
+      "scores": {
+        "terminal_bench_2": 54.4
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.063,
+      "output_per_m": 0.21,
+      "blend_per_m": 0.09975,
+      "monthly_usd": 29.93,
+      "frontier_on": [
+        "terminal_bench_2"
+      ],
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "rank": 6,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "name": "Qwen: Qwen3.8 Max",
+      "benchlm_slug": "qwen3-8-max",
+      "benchlm_name": "Qwen3.8 Max",
+      "scores": {
+        "swe_pro": 67.7
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 2.0,
+      "output_per_m": 6.0,
+      "blend_per_m": 3.0,
+      "monthly_usd": 900.0,
+      "frontier_on": [
+        "swe_pro"
+      ],
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "rank": 7,
+      "map_note": "BenchLM slug 'qwen3-8-max' mapped to base OpenRouter SKU (effort variant)"
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek: DeepSeek V4 Flash 0423",
+      "benchlm_slug": "deepseek-v4-flash-max",
+      "benchlm_name": "DeepSeek V4 Flash (Max)",
+      "scores": {
+        "swe_pro": 52.6,
+        "terminal_bench_2": 56.9,
+        "browsecomp": 73.2
+      },
+      "estimated": false,
+      "evidence_status": null,
+      "input_per_m": 0.0882,
+      "output_per_m": 0.1764,
+      "blend_per_m": 0.11025,
+      "monthly_usd": 33.08,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp"
+      ],
+      "frontier_count": 2,
+      "available_benches": 3,
+      "composite": 0.6667,
+      "rank": 8,
+      "map_note": "BenchLM slug 'deepseek-v4-flash-max' mapped to base OpenRouter SKU (effort variant)"
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "name": "OpenAI: GPT-5.6 Sol",
+      "benchlm_slug": "gpt-5-6-sol",
+      "benchlm_name": "GPT-5.6 Sol",
+      "scores": {
+        "swe_pro": 64.6,
+        "terminal_bench_2": 91.9,
+        "browsecomp": 92.2
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 5.0,
+      "output_per_m": 30.0,
+      "blend_per_m": 11.25,
+      "monthly_usd": 3375.0,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp"
+      ],
+      "frontier_count": 2,
+      "available_benches": 3,
+      "composite": 0.6667,
+      "rank": 9,
+      "map_note": null
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax: MiniMax M3",
+      "benchlm_slug": "minimax-m3",
+      "benchlm_name": "MiniMax M3",
+      "scores": {
+        "swe_pro": 59.0,
+        "terminal_bench_2": 66.0,
+        "browsecomp": 83.52
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.3,
+      "output_per_m": 1.2,
+      "blend_per_m": 0.525,
+      "monthly_usd": 157.5,
+      "frontier_on": [
+        "browsecomp"
+      ],
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "rank": 10,
+      "map_note": null
+    },
+    {
+      "id": "xiaomi/mimo-v2.5",
+      "name": "Xiaomi: MiMo-V2.5",
+      "benchlm_slug": "mimo-v2-5",
+      "benchlm_name": "MiMo-V2.5",
+      "scores": {
+        "swe_pro": 56.1,
+        "terminal_bench_2": 65.8
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.14,
+      "output_per_m": 0.28,
+      "blend_per_m": 0.175,
+      "monthly_usd": 52.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 11,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.5-35b-a3b",
+      "name": "Qwen: Qwen3.5-35B-A3B",
+      "benchlm_slug": "qwen3-5-35b-a3b",
+      "benchlm_name": "Qwen3.5-35B-A3B",
+      "scores": {
+        "terminal_bench_2": 40.5,
+        "browsecomp": 61.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.14,
+      "output_per_m": 1.0,
+      "blend_per_m": 0.355,
+      "monthly_usd": 106.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 12,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b",
+      "name": "Qwen: Qwen3.6 35B A3B",
+      "benchlm_slug": "qwen3-6-35b-a3b",
+      "benchlm_name": "Qwen3.6-35B-A3B",
+      "scores": {
+        "swe_pro": 49.5,
+        "terminal_bench_2": 51.5
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.14,
+      "output_per_m": 1.0,
+      "blend_per_m": 0.355,
+      "monthly_usd": 106.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 13,
+      "map_note": null
+    },
+    {
+      "id": "stepfun/step-3.7-flash",
+      "name": "StepFun: Step 3.7 Flash",
+      "benchlm_slug": "step-3-7-flash",
+      "benchlm_name": "Step 3.7 Flash",
+      "scores": {
+        "swe_pro": 56.3,
+        "terminal_bench_2": 59.5,
+        "browsecomp": 75.82
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.2,
+      "output_per_m": 1.15,
+      "blend_per_m": 0.4375,
+      "monthly_usd": 131.25,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 14,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "name": "OpenAI: GPT-5.4 Nano",
+      "benchlm_slug": "gpt-5-4-nano",
+      "benchlm_name": "GPT-5.4 nano",
+      "scores": {
+        "terminal_bench_2": 46.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.2,
+      "output_per_m": 1.25,
+      "blend_per_m": 0.4625,
+      "monthly_usd": 138.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 15,
+      "map_note": null
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax: MiniMax M2.7",
+      "benchlm_slug": "minimax-m2-7",
+      "benchlm_name": "MiniMax M2.7",
+      "scores": {
+        "swe_pro": 56.2,
+        "terminal_bench_2": 57.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.27,
+      "output_per_m": 1.08,
+      "blend_per_m": 0.4725,
+      "monthly_usd": 141.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 16,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.5-27b",
+      "name": "Qwen: Qwen3.5-27B",
+      "benchlm_slug": "qwen3-5-27b",
+      "benchlm_name": "Qwen3.5-27B",
+      "scores": {
+        "terminal_bench_2": 41.6,
+        "browsecomp": 61.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.195,
+      "output_per_m": 1.56,
+      "blend_per_m": 0.53625,
+      "monthly_usd": 160.88,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 17,
+      "map_note": null
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek: DeepSeek V4 Pro",
+      "benchlm_slug": "deepseek-v4-pro-max",
+      "benchlm_name": "DeepSeek V4 Pro (Max)",
+      "scores": {
+        "swe_pro": 55.4,
+        "terminal_bench_2": 67.9,
+        "browsecomp": 83.4
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.435,
+      "output_per_m": 0.87,
+      "blend_per_m": 0.54375,
+      "monthly_usd": 163.12,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 18,
+      "map_note": "BenchLM slug 'deepseek-v4-pro-max' mapped to base OpenRouter SKU (effort variant)"
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "name": "Xiaomi: MiMo-V2.5-Pro",
+      "benchlm_slug": "mimo-v2-5-pro",
+      "benchlm_name": "MiMo-V2.5-Pro",
+      "scores": {
+        "swe_pro": 57.2,
+        "terminal_bench_2": 68.4
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.435,
+      "output_per_m": 0.87,
+      "blend_per_m": 0.54375,
+      "monthly_usd": 163.12,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 19,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "name": "Qwen: Qwen3.7 Plus",
+      "benchlm_slug": "qwen3-7-plus",
+      "benchlm_name": "Qwen3.7 Plus",
+      "scores": {
+        "swe_pro": 57.6,
+        "terminal_bench_2": 70.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.32,
+      "output_per_m": 1.28,
+      "blend_per_m": 0.56,
+      "monthly_usd": 168.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 20,
+      "map_note": null
+    },
+    {
+      "id": "thinkingmachines/inkling-small",
+      "name": "Thinking Machines: Inkling Small",
+      "benchlm_slug": "inkling-small",
+      "benchlm_name": "Inkling-Small",
+      "scores": {
+        "swe_pro": 55.9,
+        "terminal_bench_2": 64.7,
+        "browsecomp": 77.4
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.5,
+      "output_per_m": 1.2,
+      "blend_per_m": 0.675,
+      "monthly_usd": 202.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 21,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.5-122b-a10b",
+      "name": "Qwen: Qwen3.5-122B-A10B",
+      "benchlm_slug": "qwen3-5-122b-a10b",
+      "benchlm_name": "Qwen3.5-122B-A10B",
+      "scores": {
+        "terminal_bench_2": 49.4,
+        "browsecomp": 63.8
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.26,
+      "output_per_m": 2.08,
+      "blend_per_m": 0.715,
+      "monthly_usd": 214.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 22,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "name": "Qwen: Qwen3.6 Plus",
+      "benchlm_slug": "qwen3-6-plus",
+      "benchlm_name": "Qwen3.6 Plus",
+      "scores": {
+        "swe_pro": 56.6,
+        "terminal_bench_2": 61.6
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.325,
+      "output_per_m": 1.95,
+      "blend_per_m": 0.73125,
+      "monthly_usd": 219.38,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 23,
+      "map_note": null
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "name": "Z.ai: GLM 4.7",
+      "benchlm_slug": "glm-4-7",
+      "benchlm_name": "GLM-4.7",
+      "scores": {
+        "terminal_bench_2": 41.0,
+        "browsecomp": 52.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.4,
+      "output_per_m": 1.75,
+      "blend_per_m": 0.7375,
+      "monthly_usd": 221.25,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 24,
+      "map_note": null
+    },
+    {
+      "id": "z-ai/glm-5.2",
+      "name": "Z.ai: GLM 5.2",
+      "benchlm_slug": "glm-5-2",
+      "benchlm_name": "GLM-5.2",
+      "scores": {
+        "swe_pro": 62.1,
+        "terminal_bench_2": 81.0
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.546,
+      "output_per_m": 1.716,
+      "blend_per_m": 0.8385,
+      "monthly_usd": 251.55,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 25,
+      "map_note": null
+    },
+    {
+      "id": "google/gemini-3.5-flash-lite",
+      "name": "Google: Gemini 3.5 Flash Lite",
+      "benchlm_slug": "gemini-3-5-flash-lite",
+      "benchlm_name": "Gemini 3.5 Flash-Lite",
+      "scores": {
+        "swe_pro": 54.2,
+        "terminal_bench_2": 54.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.3,
+      "output_per_m": 2.5,
+      "blend_per_m": 0.85,
+      "monthly_usd": 255.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 26,
+      "map_note": null
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "MoonshotAI: Kimi K2.6",
+      "benchlm_slug": "kimi-2-6",
+      "benchlm_name": "Kimi K2.6",
+      "scores": {
+        "swe_pro": 58.6,
+        "terminal_bench_2": 66.7,
+        "browsecomp": 83.2
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.57,
+      "output_per_m": 2.4,
+      "blend_per_m": 1.0275,
+      "monthly_usd": 308.25,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 27,
+      "map_note": null
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "MoonshotAI: Kimi K2.5",
+      "benchlm_slug": "kimi-k2-5",
+      "benchlm_name": "Kimi K2.5",
+      "scores": {
+        "swe_pro": 50.7,
+        "terminal_bench_2": 50.8,
+        "browsecomp": 60.6
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.57,
+      "output_per_m": 2.85,
+      "blend_per_m": 1.14,
+      "monthly_usd": 342.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 28,
+      "map_note": null
+    },
+    {
+      "id": "z-ai/glm-5",
+      "name": "Z.ai: GLM 5",
+      "benchlm_slug": "glm-5-1",
+      "benchlm_name": "GLM-5.1",
+      "scores": {
+        "swe_pro": 58.4,
+        "terminal_bench_2": 63.5,
+        "browsecomp": 68.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 0.95,
+      "output_per_m": 2.55,
+      "blend_per_m": 1.35,
+      "monthly_usd": 405.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 29,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.6-27b",
+      "name": "Qwen: Qwen3.6 27B",
+      "benchlm_slug": "qwen3-6-27b",
+      "benchlm_name": "Qwen3.6-27B",
+      "scores": {
+        "swe_pro": 53.5,
+        "terminal_bench_2": 59.3
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.6,
+      "output_per_m": 3.6,
+      "blend_per_m": 1.35,
+      "monthly_usd": 405.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 30,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "name": "OpenAI: GPT-5.4 Mini",
+      "benchlm_slug": "gpt-5-4-mini",
+      "benchlm_name": "GPT-5.4 mini",
+      "scores": {
+        "terminal_bench_2": 60.0
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 0.75,
+      "output_per_m": 4.5,
+      "blend_per_m": 1.6875,
+      "monthly_usd": 506.25,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 31,
+      "map_note": null
+    },
+    {
+      "id": "thinkingmachines/inkling",
+      "name": "Thinking Machines: Inkling",
+      "benchlm_slug": "inkling",
+      "benchlm_name": "Inkling",
+      "scores": {
+        "swe_pro": 54.3,
+        "terminal_bench_2": 63.8,
+        "browsecomp": 77.1
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 1.0,
+      "output_per_m": 4.05,
+      "blend_per_m": 1.7625,
+      "monthly_usd": 528.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 32,
+      "map_note": null
+    },
+    {
+      "id": "meta/muse-spark-1.1",
+      "name": "Meta: Muse Spark 1.1",
+      "benchlm_slug": "muse-spark-1-1",
+      "benchlm_name": "Muse Spark 1.1",
+      "scores": {
+        "swe_pro": 61.5,
+        "terminal_bench_2": 80.0
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 1.25,
+      "output_per_m": 4.25,
+      "blend_per_m": 2.0,
+      "monthly_usd": 600.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 33,
+      "map_note": null
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "name": "Qwen: Qwen3.7 Max",
+      "benchlm_slug": "qwen3-7-max",
+      "benchlm_name": "Qwen3.7 Max",
+      "scores": {
+        "swe_pro": 60.6,
+        "terminal_bench_2": 69.7
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 1.475,
+      "output_per_m": 4.425,
+      "blend_per_m": 2.2125,
+      "monthly_usd": 663.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 34,
+      "map_note": "BenchLM slug 'qwen3-7-max' mapped to base OpenRouter SKU (effort variant)"
+    },
+    {
+      "id": "qwen/qwen3.6-max-preview",
+      "name": "Qwen: Qwen3.6 Max Preview",
+      "benchlm_slug": "qwen3-6-max-preview",
+      "benchlm_name": "Qwen 3.6 Max (preview)",
+      "scores": {
+        "swe_pro": 57.3,
+        "terminal_bench_2": 65.4
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 1.027,
+      "output_per_m": 6.162,
+      "blend_per_m": 2.31075,
+      "monthly_usd": 693.23,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 35,
+      "map_note": null
+    },
+    {
+      "id": "x-ai/grok-4.5",
+      "name": "SpaceXAI: Grok 4.5",
+      "benchlm_slug": "grok-4-5",
+      "benchlm_name": "Grok 4.5",
+      "scores": {
+        "swe_pro": 64.7,
+        "terminal_bench_2": 83.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 2.0,
+      "output_per_m": 6.0,
+      "blend_per_m": 3.0,
+      "monthly_usd": 900.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 36,
+      "map_note": null
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "name": "Google: Gemini 3.5 Flash",
+      "benchlm_slug": "gemini-3-5-flash",
+      "benchlm_name": "Gemini 3.5 Flash",
+      "scores": {
+        "swe_pro": 55.1,
+        "terminal_bench_2": 76.2
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 1.5,
+      "output_per_m": 9.0,
+      "blend_per_m": 3.375,
+      "monthly_usd": 1012.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 37,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Anthropic: Claude Sonnet 5",
+      "benchlm_slug": "claude-sonnet-5",
+      "benchlm_name": "Claude Sonnet 5",
+      "scores": {
+        "swe_pro": 63.2,
+        "terminal_bench_2": 80.4,
+        "browsecomp": 84.7
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 2.0,
+      "output_per_m": 10.0,
+      "blend_per_m": 4.0,
+      "monthly_usd": 1200.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 38,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.3-codex",
+      "name": "OpenAI: GPT-5.3-Codex",
+      "benchlm_slug": "gpt-5-3-codex",
+      "benchlm_name": "GPT-5.3 Codex",
+      "scores": {
+        "swe_pro": 56.8,
+        "terminal_bench_2": 77.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 1.75,
+      "output_per_m": 14.0,
+      "blend_per_m": 4.8125,
+      "monthly_usd": 1443.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 39,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "name": "OpenAI: GPT-5.2",
+      "benchlm_slug": "gpt-5-2",
+      "benchlm_name": "GPT-5.2",
+      "scores": {
+        "swe_pro": 55.6,
+        "browsecomp": 65.8
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 1.75,
+      "output_per_m": 14.0,
+      "blend_per_m": 4.8125,
+      "monthly_usd": 1443.75,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 40,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "OpenAI: GPT-5.4",
+      "benchlm_slug": "gpt-5-4",
+      "benchlm_name": "GPT-5.4",
+      "scores": {
+        "swe_pro": 57.7,
+        "terminal_bench_2": 75.1,
+        "browsecomp": 82.7
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 2.5,
+      "output_per_m": 15.0,
+      "blend_per_m": 5.625,
+      "monthly_usd": 1687.5,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 41,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Anthropic: Claude Sonnet 4.6",
+      "benchlm_slug": "claude-sonnet-4-6",
+      "benchlm_name": "Claude Sonnet 4.6",
+      "scores": {
+        "terminal_bench_2": 59.1
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 3.0,
+      "output_per_m": 15.0,
+      "blend_per_m": 6.0,
+      "monthly_usd": 1800.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 42,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.5",
+      "name": "Anthropic: Claude Sonnet 4.5",
+      "benchlm_slug": "claude-sonnet-4-5",
+      "benchlm_name": "Claude Sonnet 4.5",
+      "scores": {
+        "terminal_bench_2": 50.0
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 3.0,
+      "output_per_m": 15.0,
+      "blend_per_m": 6.0,
+      "monthly_usd": 1800.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 43,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "name": "Anthropic: Claude Opus 4.8",
+      "benchlm_slug": "claude-opus-4-8",
+      "benchlm_name": "Claude Opus 4.8",
+      "scores": {
+        "swe_pro": 69.2,
+        "terminal_bench_2": 74.6,
+        "browsecomp": 84.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 44,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Anthropic: Claude Opus 4.7",
+      "benchlm_slug": "claude-opus-4-7-adaptive",
+      "benchlm_name": "Claude Opus 4.7 (Adaptive)",
+      "scores": {
+        "swe_pro": 64.3,
+        "terminal_bench_2": 69.4,
+        "browsecomp": 79.3
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 45,
+      "map_note": "BenchLM slug 'claude-opus-4-7-adaptive' mapped to base OpenRouter SKU (effort variant)"
+    },
+    {
+      "id": "anthropic/claude-opus-4.6",
+      "name": "Anthropic: Claude Opus 4.6",
+      "benchlm_slug": "claude-opus-4-6",
+      "benchlm_name": "Claude Opus 4.6",
+      "scores": {
+        "swe_pro": 53.4,
+        "terminal_bench_2": 65.4,
+        "browsecomp": 83.7
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 46,
+      "map_note": null
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Anthropic: Claude Opus 4.5",
+      "benchlm_slug": "claude-opus-4-5",
+      "benchlm_name": "Claude Opus 4.5",
+      "scores": {
+        "swe_pro": 57.1,
+        "terminal_bench_2": 59.3
+      },
+      "estimated": false,
+      "evidence_status": "supported",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 2,
+      "composite": 0.0,
+      "rank": 47,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "name": "OpenAI: GPT-5.5",
+      "benchlm_slug": "gpt-5-5",
+      "benchlm_name": "GPT-5.5",
+      "scores": {
+        "swe_pro": 58.6,
+        "terminal_bench_2": 82.0,
+        "browsecomp": 84.4
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 5.0,
+      "output_per_m": 30.0,
+      "blend_per_m": 11.25,
+      "monthly_usd": 3375.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 3,
+      "composite": 0.0,
+      "rank": 48,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.5-pro",
+      "name": "OpenAI: GPT-5.5 Pro",
+      "benchlm_slug": "gpt-5-5-pro",
+      "benchlm_name": "GPT-5.5 Pro",
+      "scores": {
+        "browsecomp": 90.1
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 30.0,
+      "output_per_m": 180.0,
+      "blend_per_m": 67.5,
+      "monthly_usd": 20250.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 49,
+      "map_note": null
+    },
+    {
+      "id": "openai/gpt-5.4-pro",
+      "name": "OpenAI: GPT-5.4 Pro",
+      "benchlm_slug": "gpt-5-4-pro",
+      "benchlm_name": "GPT-5.4 Pro",
+      "scores": {
+        "browsecomp": 89.3
+      },
+      "estimated": true,
+      "evidence_status": "estimated",
+      "input_per_m": 30.0,
+      "output_per_m": 180.0,
+      "blend_per_m": 67.5,
+      "monthly_usd": 20250.0,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "available_benches": 1,
+      "composite": 0.0,
+      "rank": 50,
+      "map_note": null
+    }
+  ]
+}

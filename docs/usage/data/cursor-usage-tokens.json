@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "collected_at": "2026-08-07",
+    "source_file": "usage-events-2026-08-06 (1).csv",
+    "source_export": "Cursor dashboard export-usage-events-csv?strategy=tokens",
+    "date_range": {
+      "start": "2025-09-09T00:52:15.782Z",
+      "end": "2026-08-06T23:30:12.915Z"
+    },
+    "events": 10738,
+    "references": [
+      "https://forum.cursor.com/t/tokens-cost-no-longer-showing-for-auto-in-usage-data-in-web-dashboard/162226",
+      "https://forum.cursor.com/t/auto-showing-0-tokens-in-usage/160889"
+    ],
+    "caveats": [
+      "From ~2026-05-14, Included Auto usage is Cost=Free with blank token columns in the CSV — Cursor staff confirmed this is expected dashboard behavior, not missing usage.",
+      "estimatedExtraTokens fills only auto + Included + Free empty rows using historical auto token median, scaled so extras sum to 600M.",
+      "Estimates assume Free-era request size ≈ pre-blank auto distribution; actual sizes may differ.",
+      "reportedCostUsd sums numeric Cost cells only; Free rows contribute 0.",
+      "2026-08 is partial (through Aug 6)."
+    ]
+  },
+  "estimation": {
+    "method": "median_per_empty_free_included_auto",
+    "baseline": "auto events with Total Tokens > 0 (n=7666)",
+    "per_event_tokens": {
+      "mean": 352984,
+      "median": 202942,
+      "p25": 82516,
+      "p75": 437409,
+      "p90": 792413,
+      "p95": 1148162
+    },
+    "chosen_per_event": 202942,
+    "empty_free_included_auto_events": 2926,
+    "raw_extra_tokens_at_median": 593808292,
+    "target_extra_tokens": 600000000,
+    "scale_to_target": 1.0104,
+    "rationale": "Distribution is right-skewed (mean/median≈1.74); median preferred over mean. User chose ~0.6B conservative round of median×empty (≈0.594B). Mode buckets understate totals."
+  },
+  "totals": {
+    "recordedTokens": 2723559237,
+    "estimatedExtraTokens": 600000000,
+    "estimatedTotalTokens": 3323559237,
+    "reportedCostUsd": 1027.6,
+    "eventsWithTokens": 7718,
+    "emptyFreeIncludedAuto": 2926,
+    "emptyOther": 94,
+    "freeCostEvents": 2945,
+    "monthlyAverageEstimatedTokens": 276963270,
+    "monthlyAverageEstimatedTokensExcludingPartialAug": 295244582
+  },
+  "composition_recorded": {
+    "cacheRead": 2464076632,
+    "inputCacheWrite": 109296350,
+    "inputNoCacheWrite": 129515502,
+    "output": 20670753,
+    "cacheReadShare": 0.905,
+    "outputShare": 0.008
+  },
+  "by_model": [
+    {
+      "model": "auto",
+      "events": 10685,
+      "tokens": 2705974541,
+      "output": 20534723,
+      "cacheRead": 2448386478,
+      "input": 237053340,
+      "shareOfRecorded": 0.9935
+    },
+    {
+      "model": "agent_review",
+      "events": 7,
+      "tokens": 12355778,
+      "output": 31070,
+      "cacheRead": 11228582,
+      "input": 1096126,
+      "shareOfRecorded": 0.0045
+    },
+    {
+      "model": "claude-4.5-sonnet-thinking",
+      "events": 27,
+      "tokens": 3100928,
+      "output": 54332,
+      "cacheRead": 2731194,
+      "input": 315402,
+      "shareOfRecorded": 0.0011
+    },
+    {
+      "model": "cursor-grok-4.5-high-fast",
+      "events": 8,
+      "tokens": 1227687,
+      "output": 27928,
+      "cacheRead": 1103232,
+      "input": 96527,
+      "shareOfRecorded": 0.0005
+    },
+    {
+      "model": "claude-4.6-sonnet-medium-thinking",
+      "events": 10,
+      "tokens": 872592,
+      "output": 22142,
+      "cacheRead": 606442,
+      "input": 244008,
+      "shareOfRecorded": 0.0003
+    },
+    {
+      "model": "composer-1.5",
+      "events": 1,
+      "tokens": 27711,
+      "output": 558,
+      "cacheRead": 20704,
+      "input": 6449,
+      "shareOfRecorded": 0
+    }
+  ],
+  "by_kind": [
+    {
+      "kind": "Included",
+      "events": 10569,
+      "tokens": 2648878127
+    },
+    {
+      "kind": "pro-free-trial",
+      "events": 141,
+      "tokens": 74681110
+    },
+    {
+      "kind": "Errored, No Charge",
+      "events": 27,
+      "tokens": 0
+    },
+    {
+      "kind": "Aborted, Not Charged",
+      "events": 1,
+      "tokens": 0
+    }
+  ],
+  "by_month": [
+    {
+      "month": "2025-09",
+      "events": 1943,
+      "filledEvents": 1923,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 20,
+      "recordedTokens": 855643703,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 855643703,
+      "reportedCostUsd": 277.29,
+      "outputTokens": 5322622,
+      "cacheReadTokens": 806875354,
+      "inputTokens": 43445727
+    },
+    {
+      "month": "2025-10",
+      "events": 962,
+      "filledEvents": 952,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 10,
+      "recordedTokens": 337378183,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 337378183,
+      "reportedCostUsd": 127.88,
+      "outputTokens": 2193603,
+      "cacheReadTokens": 304342969,
+      "inputTokens": 30841611
+    },
+    {
+      "month": "2025-11",
+      "events": 580,
+      "filledEvents": 576,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 4,
+      "recordedTokens": 152385719,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 152385719,
+      "reportedCostUsd": 56.29,
+      "outputTokens": 1317310,
+      "cacheReadTokens": 140325254,
+      "inputTokens": 10743155
+    },
+    {
+      "month": "2025-12",
+      "events": 1195,
+      "filledEvents": 1190,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 5,
+      "recordedTokens": 474878408,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 474878408,
+      "reportedCostUsd": 183.83,
+      "outputTokens": 3678891,
+      "cacheReadTokens": 423049688,
+      "inputTokens": 48149829
+    },
+    {
+      "month": "2026-01",
+      "events": 504,
+      "filledEvents": 488,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 16,
+      "recordedTokens": 134811905,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 134811905,
+      "reportedCostUsd": 58.48,
+      "outputTokens": 1312287,
+      "cacheReadTokens": 117559272,
+      "inputTokens": 15940346
+    },
+    {
+      "month": "2026-02",
+      "events": 673,
+      "filledEvents": 673,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 0,
+      "recordedTokens": 168424216,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 168424216,
+      "reportedCostUsd": 67.35,
+      "outputTokens": 2069414,
+      "cacheReadTokens": 154091483,
+      "inputTokens": 12263319
+    },
+    {
+      "month": "2026-03",
+      "events": 588,
+      "filledEvents": 577,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 11,
+      "recordedTokens": 165618766,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 165618766,
+      "reportedCostUsd": 63.6,
+      "outputTokens": 1789000,
+      "cacheReadTokens": 151926176,
+      "inputTokens": 11903590
+    },
+    {
+      "month": "2026-04",
+      "events": 1099,
+      "filledEvents": 1083,
+      "emptyFreeIncluded": 0,
+      "emptyOther": 16,
+      "recordedTokens": 328171414,
+      "estimatedExtraTokens": 0,
+      "estimatedTotalTokens": 328171414,
+      "reportedCostUsd": 146.39,
+      "outputTokens": 2237111,
+      "cacheReadTokens": 274500608,
+      "inputTokens": 51433695
+    },
+    {
+      "month": "2026-05",
+      "events": 692,
+      "filledEvents": 248,
+      "emptyFreeIncluded": 439,
+      "emptyOther": 5,
+      "recordedTokens": 105019236,
+      "estimatedExtraTokens": 90020506,
+      "estimatedTotalTokens": 195039742,
+      "reportedCostUsd": 44.49,
+      "outputTokens": 722587,
+      "cacheReadTokens": 90302596,
+      "inputTokens": 13994053
+    },
+    {
+      "month": "2026-06",
+      "events": 605,
+      "filledEvents": 0,
+      "emptyFreeIncluded": 603,
+      "emptyOther": 2,
+      "recordedTokens": 0,
+      "estimatedExtraTokens": 123650034,
+      "estimatedTotalTokens": 123650034,
+      "reportedCostUsd": 0,
+      "outputTokens": 0,
+      "cacheReadTokens": 0,
+      "inputTokens": 0
+    },
+    {
+      "month": "2026-07",
+      "events": 1524,
+      "filledEvents": 0,
+      "emptyFreeIncluded": 1520,
+      "emptyOther": 4,
+      "recordedTokens": 0,
+      "estimatedExtraTokens": 311688312,
+      "estimatedTotalTokens": 311688312,
+      "reportedCostUsd": 0,
+      "outputTokens": 0,
+      "cacheReadTokens": 0,
+      "inputTokens": 0
+    },
+    {
+      "month": "2026-08",
+      "events": 373,
+      "filledEvents": 8,
+      "emptyFreeIncluded": 364,
+      "emptyOther": 1,
+      "recordedTokens": 1227687,
+      "estimatedExtraTokens": 74641148,
+      "estimatedTotalTokens": 75868835,
+      "reportedCostUsd": 2,
+      "outputTokens": 27928,
+      "cacheReadTokens": 1103232,
+      "inputTokens": 96527
+    }
+  ]
+}

@@ -1,0 +1,2326 @@
+{
+  "meta": {
+    "collected_at": "2026-08-06",
+    "assumptions": {
+      "blend": "(3*input + 1*output)/4 $/1M tokens",
+      "monthly_tokens": 300000000,
+      "io_ratio": "3:1",
+      "monthly_formula": "225*input$/1M + 75*output$/1M",
+      "pareto": "per-benchmark maximize score, minimize monthly cost; composite = frontier_count/available_benches",
+      "swe_bench": "Verified"
+    },
+    "sources": [
+      "OpenRouter GET /api/v1/models",
+      "https://llm-stats.com/benchmarks/swe-bench-verified",
+      "https://llm-stats.com/benchmarks/livecodebench",
+      "https://llm-stats.com/benchmarks/bfcl-v4",
+      "https://llm-stats.com/benchmarks/humaneval",
+      "https://benchlm.ai/benchmarks/swe-bench-verified",
+      "https://tokenmix.ai/blog/llm-leaderboard-2026",
+      "NVIDIA RULER (historical 128K)",
+      "Awesome Agents long-context leaderboard (NIAH/MRCR proxies)",
+      "https://benchlm.ai/data/models.json",
+      "https://benchlm.ai (Estimated/Supported evidenceStatus)",
+      "Artificial Analysis fields embedded in BenchLM (aaLiveCodeBench, aaCodingIndex)",
+      "https://benchlm.ai (evidenceStatus estimated/supported)",
+      "Artificial Analysis fields embedded in BenchLM (aaLiveCodeBench)"
+    ],
+    "missing_openrouter": [],
+    "caveats": [
+      "HumanEval/MBPP are largely saturated; frontiers skew toward cheaper models.",
+      "BFCL-V4 public coverage on aggregator sites is sparse (many frontier models missing).",
+      "RULER/NIAH coverage is sparse for 2026 frontier models; treat as reference-only.",
+      "SWE-bench Verified scores depend on harness/scaffold; vendor self-reports may differ.",
+      "OpenRouter prices can vary by provider route; used list endpoint base pricing.",
+      "Scores marked estimated=true come from BenchLM Estimated models or AA proxy fields.",
+      "Public curated scores are never overwritten by BenchLM fills.",
+      "Scores with estimated=true come from BenchLM Estimated models or AA-embedded fields.",
+      "Artificial Analysis free API requires a key; AA values used only when embedded in BenchLM."
+    ],
+    "estimation": {
+      "method": "Fill missing cells from BenchLM models.json. Mark estimated=true when BenchLM evidenceStatus=estimated or AA-embedded field. Public curated scores are not overwritten; overlapping public scores on Estimated models are flagged.",
+      "benchlm_generated_at": "2026-08-06T17:04:54.864Z",
+      "fills": 12,
+      "estimated_fills": 2,
+      "attribution": "Data from BenchLM.ai (includes Artificial Analysis fields where embedded)",
+      "aa_note": "AA LiveCodeBench used only via coding.aaLiveCodeBench when present; aaCodingIndex not mapped to LCB."
+    }
+  },
+  "frontiers": {
+    "swe_bench_verified": [
+      "anthropic/claude-opus-5",
+      "anthropic/claude-sonnet-5",
+      "deepseek/deepseek-v4-flash",
+      "deepseek/deepseek-v4-pro",
+      "minimax/minimax-m2.5",
+      "minimax/minimax-m3"
+    ],
+    "bfcl": [
+      "anthropic/claude-opus-4.5",
+      "qwen/qwen3.5-27b",
+      "qwen/qwen3.7-max",
+      "qwen/qwen3.7-plus"
+    ],
+    "livecodebench": [
+      "deepseek/deepseek-v4-flash",
+      "deepseek/deepseek-v4-pro"
+    ],
+    "humaneval": [
+      "anthropic/claude-opus-4.6",
+      "deepseek/deepseek-v4-pro",
+      "openai/gpt-4o-mini"
+    ],
+    "mbpp": [
+      "moonshotai/kimi-k2-0905",
+      "openai/gpt-4o-mini",
+      "openai/gpt-5"
+    ],
+    "ruler": [
+      "openai/gpt-4-turbo"
+    ],
+    "niah": [
+      "meta-llama/llama-4-scout"
+    ]
+  },
+  "models": [
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "provider": "DeepSeek",
+      "input_per_m": 0.435,
+      "output_per_m": 0.87,
+      "blend_per_m": 0.5437,
+      "monthly_usd": 163.12,
+      "scores": {
+        "swe_bench_verified": 80.6,
+        "humaneval": 94.8,
+        "livecodebench": 93.5
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats DeepSeek-V4-Pro-Max",
+        "humaneval": "TokenMix DeepSeek V4",
+        "livecodebench": "llm-stats DeepSeek-V4-Pro-Max"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "swe_bench_verified",
+        "livecodebench",
+        "humaneval"
+      ],
+      "frontier_count": 3,
+      "composite": 1.0,
+      "benchlm_slug": "deepseek-v4-pro",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "humaneval": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats DeepSeek-V4-Pro-Max",
+          "estimated": false
+        },
+        "humaneval": {
+          "source": "public_curated",
+          "note": "TokenMix DeepSeek V4",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats DeepSeek-V4-Pro-Max",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "provider": "DeepSeek",
+      "input_per_m": 0.0882,
+      "output_per_m": 0.1764,
+      "blend_per_m": 0.1103,
+      "monthly_usd": 33.08,
+      "scores": {
+        "swe_bench_verified": 79.0,
+        "livecodebench": 91.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats DeepSeek-V4-Flash-Max",
+        "livecodebench": "llm-stats DeepSeek-V4-Flash-Max"
+      },
+      "available_benches": 2,
+      "frontier_on": [
+        "swe_bench_verified",
+        "livecodebench"
+      ],
+      "frontier_count": 2,
+      "composite": 1.0,
+      "benchlm_slug": "deepseek-v4-flash",
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats DeepSeek-V4-Flash-Max",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats DeepSeek-V4-Flash-Max",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "provider": "OpenAI",
+      "input_per_m": 0.15,
+      "output_per_m": 0.6,
+      "blend_per_m": 0.2625,
+      "monthly_usd": 78.75,
+      "scores": {
+        "humaneval": 87.2,
+        "mbpp": 84.1
+      },
+      "score_notes": {
+        "humaneval": "llm-stats Aug 2026",
+        "mbpp": "GenAIList"
+      },
+      "available_benches": 2,
+      "frontier_on": [
+        "humaneval",
+        "mbpp"
+      ],
+      "frontier_count": 2,
+      "composite": 1.0,
+      "benchlm_slug": "gpt-4o-mini",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "humaneval": false,
+        "mbpp": false
+      },
+      "score_provenance": {
+        "humaneval": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "mbpp": {
+          "source": "public_curated",
+          "note": "GenAIList",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "meta-llama/llama-4-scout",
+      "name": "Llama 4 Scout",
+      "provider": "Meta",
+      "input_per_m": 0.1,
+      "output_per_m": 0.3,
+      "blend_per_m": 0.15,
+      "monthly_usd": 45.0,
+      "scores": {
+        "niah": 99.0
+      },
+      "score_notes": {
+        "niah": "vendor/near-perfect NIAH to 10M (Awesome Agents)"
+      },
+      "available_benches": 1,
+      "frontier_on": [
+        "niah"
+      ],
+      "frontier_count": 1,
+      "composite": 1.0,
+      "benchlm_slug": "llama-4-scout",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "niah": false
+      },
+      "score_provenance": {
+        "niah": {
+          "source": "public_curated",
+          "note": "vendor/near-perfect NIAH to 10M (Awesome Agents)",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "name": "MiniMax M2.5",
+      "provider": "MiniMax",
+      "input_per_m": 0.22,
+      "output_per_m": 0.9,
+      "blend_per_m": 0.39,
+      "monthly_usd": 117.0,
+      "scores": {
+        "swe_bench_verified": 80.2
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats"
+      },
+      "available_benches": 1,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_count": 1,
+      "composite": 1.0,
+      "benchlm_slug": "minimax-m2-5",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax M3",
+      "provider": "MiniMax",
+      "input_per_m": 0.3,
+      "output_per_m": 1.2,
+      "blend_per_m": 0.525,
+      "monthly_usd": 157.5,
+      "scores": {
+        "swe_bench_verified": 80.5
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_count": 1,
+      "composite": 1.0,
+      "benchlm_slug": "minimax-m3",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "input_per_m": 2.0,
+      "output_per_m": 10.0,
+      "blend_per_m": 4.0,
+      "monthly_usd": 1200.0,
+      "scores": {
+        "swe_bench_verified": 85.2
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_count": 1,
+      "composite": 1.0,
+      "benchlm_slug": "claude-sonnet-5",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": true
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026 | BenchLM evidenceStatus=estimated",
+          "estimated": true,
+          "benchlm_overlap": true
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 1,
+      "estimated_score_count": 1
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "Claude Opus 5",
+      "provider": "Anthropic",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "scores": {
+        "swe_bench_verified": 96.0
+      },
+      "score_notes": {
+        "swe_bench_verified": "BenchLM Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_count": 1,
+      "composite": 1.0,
+      "benchlm_slug": "claude-opus-5",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "BenchLM Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3.5-27b",
+      "name": "Qwen3.5 27B",
+      "provider": "Qwen",
+      "input_per_m": 0.195,
+      "output_per_m": 1.56,
+      "blend_per_m": 0.5363,
+      "monthly_usd": 160.88,
+      "scores": {
+        "bfcl": 68.5,
+        "swe_bench_verified": 72.4
+      },
+      "score_notes": {
+        "bfcl": "llm-stats BFCL-V4"
+      },
+      "available_benches": 2,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_count": 1,
+      "composite": 0.5,
+      "benchlm_slug": "qwen3-5-27b",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "bfcl": false,
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "bfcl": {
+          "source": "public_curated",
+          "note": "llm-stats BFCL-V4",
+          "estimated": false
+        },
+        "swe_bench_verified": {
+          "source": "benchlm",
+          "field": "coding.sweVerified",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.sweVerified"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-4-turbo",
+      "name": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "input_per_m": 10.0,
+      "output_per_m": 30.0,
+      "blend_per_m": 15.0,
+      "monthly_usd": 4500.0,
+      "scores": {
+        "humaneval": 87.1,
+        "ruler": 81.2
+      },
+      "score_notes": {
+        "humaneval": "llm-stats",
+        "ruler": "NVIDIA RULER 128K avg (GPT-4-1106-preview proxy)"
+      },
+      "available_benches": 2,
+      "frontier_on": [
+        "ruler"
+      ],
+      "frontier_count": 1,
+      "composite": 0.5,
+      "benchlm_slug": "gpt-4-turbo",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "humaneval": false,
+        "ruler": false
+      },
+      "score_provenance": {
+        "humaneval": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "ruler": {
+          "source": "public_curated",
+          "note": "NVIDIA RULER 128K avg (GPT-4-1106-preview proxy)",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "provider": "Qwen",
+      "input_per_m": 0.32,
+      "output_per_m": 1.28,
+      "blend_per_m": 0.56,
+      "monthly_usd": 168.0,
+      "scores": {
+        "swe_bench_verified": 77.7,
+        "bfcl": 72.9,
+        "livecodebench": 89.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Qwen3.7-Plus",
+        "bfcl": "llm-stats BFCL-V4"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": "qwen3-7-plus",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "bfcl": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Qwen3.7-Plus",
+          "estimated": false
+        },
+        "bfcl": {
+          "source": "public_curated",
+          "note": "llm-stats BFCL-V4",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBench",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBench"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "moonshotai/kimi-k2-0905",
+      "name": "Kimi K2 0905",
+      "provider": "Moonshot",
+      "input_per_m": 0.6,
+      "output_per_m": 2.5,
+      "blend_per_m": 1.075,
+      "monthly_usd": 322.5,
+      "scores": {
+        "humaneval": 94.5,
+        "mbpp": 89.96,
+        "livecodebench": 53.7
+      },
+      "score_notes": {
+        "humaneval": "llm-stats",
+        "livecodebench": "llm-stats Kimi K2-Instruct-0905",
+        "mbpp": "GenAIList sanitized"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "mbpp"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": "kimi-k2",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "humaneval": false,
+        "mbpp": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "humaneval": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "mbpp": {
+          "source": "public_curated",
+          "note": "GenAIList sanitized",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats Kimi K2-Instruct-0905",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "provider": "Qwen",
+      "input_per_m": 1.475,
+      "output_per_m": 4.425,
+      "blend_per_m": 2.2125,
+      "monthly_usd": 663.75,
+      "scores": {
+        "swe_bench_verified": 80.4,
+        "bfcl": 75.0,
+        "livecodebench": 91.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026",
+        "bfcl": "llm-stats BFCL-V4 Aug 2026"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": "qwen3-7-max",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "bfcl": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "bfcl": {
+          "source": "public_curated",
+          "note": "llm-stats BFCL-V4 Aug 2026",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBench",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBench"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-5",
+      "name": "GPT-5",
+      "provider": "OpenAI",
+      "input_per_m": 1.25,
+      "output_per_m": 10.0,
+      "blend_per_m": 3.4375,
+      "monthly_usd": 1031.25,
+      "scores": {
+        "swe_bench_verified": 74.9,
+        "humaneval": 93.4,
+        "mbpp": 91.72
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026",
+        "humaneval": "llm-stats Aug 2026",
+        "mbpp": "GenAIList sanitized pass@1"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "mbpp"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": null,
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "humaneval": false,
+        "mbpp": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "humaneval": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "mbpp": {
+          "source": "public_curated",
+          "note": "GenAIList sanitized pass@1",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-opus-4.6",
+      "name": "Claude Opus 4.6",
+      "provider": "Anthropic",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "scores": {
+        "swe_bench_verified": 80.8,
+        "humaneval": 95.2,
+        "livecodebench": 72.8
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats / TokenMix 2026",
+        "humaneval": "TokenMix 2026",
+        "livecodebench": "TokenMix 2026"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "humaneval"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": "claude-opus-4-6",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "humaneval": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats / TokenMix 2026",
+          "estimated": false
+        },
+        "humaneval": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Claude Opus 4.5",
+      "provider": "Anthropic",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "scores": {
+        "swe_bench_verified": 80.9,
+        "bfcl": 77.5,
+        "livecodebench": 84.8
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026",
+        "bfcl": "BFCL overall ~FC (public reports early 2026)"
+      },
+      "available_benches": 3,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_count": 1,
+      "composite": 0.3333,
+      "benchlm_slug": "claude-opus-4-5",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "bfcl": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "bfcl": {
+          "source": "public_curated",
+          "note": "BFCL overall ~FC (public reports early 2026)",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBenchV6",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBenchV6"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3-32b",
+      "name": "Qwen3 32B",
+      "provider": "Qwen",
+      "input_per_m": 0.08,
+      "output_per_m": 0.28,
+      "blend_per_m": 0.13,
+      "monthly_usd": 39.0,
+      "scores": {
+        "livecodebench": 65.7
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": null,
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "meta-llama/llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "provider": "Meta",
+      "input_per_m": 0.2,
+      "output_per_m": 0.8,
+      "blend_per_m": 0.35,
+      "monthly_usd": 105.0,
+      "scores": {
+        "mbpp": 77.6,
+        "livecodebench": 43.4
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats",
+        "mbpp": "airank.dev MBPP"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "llama-4-maverick",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "mbpp": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "mbpp": {
+          "source": "public_curated",
+          "note": "airank.dev MBPP",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3.1",
+      "name": "DeepSeek V3.1",
+      "provider": "DeepSeek",
+      "input_per_m": 0.25,
+      "output_per_m": 0.95,
+      "blend_per_m": 0.425,
+      "monthly_usd": 127.5,
+      "scores": {
+        "livecodebench": 56.4
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats DeepSeek-V3.1"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "deepseek-v3-1",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats DeepSeek-V3.1",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "minimax/minimax-m2",
+      "name": "MiniMax M2",
+      "provider": "MiniMax",
+      "input_per_m": 0.255,
+      "output_per_m": 1.02,
+      "blend_per_m": 0.4463,
+      "monthly_usd": 133.88,
+      "scores": {
+        "livecodebench": 83.0
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": null,
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3-0324",
+      "name": "DeepSeek V3 0324",
+      "provider": "DeepSeek",
+      "input_per_m": 0.27,
+      "output_per_m": 1.12,
+      "blend_per_m": 0.4825,
+      "monthly_usd": 144.75,
+      "scores": {
+        "livecodebench": 49.2,
+        "swe_bench_verified": 42.0
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "deepseek-v3",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "livecodebench": false,
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "swe_bench_verified": {
+          "source": "benchlm",
+          "field": "coding.sweVerified",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.sweVerified"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "minimax/minimax-m2.1",
+      "name": "MiniMax M2.1",
+      "provider": "MiniMax",
+      "input_per_m": 0.3,
+      "output_per_m": 1.2,
+      "blend_per_m": 0.525,
+      "monthly_usd": 157.5,
+      "scores": {
+        "livecodebench": 78.0
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": null,
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "name": "Qwen3.6 Plus",
+      "provider": "Qwen",
+      "input_per_m": 0.325,
+      "output_per_m": 1.95,
+      "blend_per_m": 0.7312,
+      "monthly_usd": 219.38,
+      "scores": {
+        "swe_bench_verified": 78.8,
+        "livecodebench": 87.1
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "qwen3-6-plus",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBenchV6",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBenchV6"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "name": "GLM-4.7",
+      "provider": "Zhipu",
+      "input_per_m": 0.4,
+      "output_per_m": 1.75,
+      "blend_per_m": 0.7375,
+      "monthly_usd": 221.25,
+      "scores": {
+        "swe_bench_verified": 73.8,
+        "livecodebench": 84.9
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "glm-4-7",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBench",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBench"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b",
+      "name": "Qwen3 235B-A22B",
+      "provider": "Qwen",
+      "input_per_m": 0.455,
+      "output_per_m": 1.82,
+      "blend_per_m": 0.7962,
+      "monthly_usd": 238.88,
+      "scores": {
+        "mbpp": 81.4,
+        "livecodebench": 70.7
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats",
+        "mbpp": "airank.dev MBPP"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "qwen3-235b-2507",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "mbpp": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "mbpp": {
+          "source": "public_curated",
+          "note": "airank.dev MBPP",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "amazon/nova-2-lite-v1",
+      "name": "Nova 2 Lite",
+      "provider": "Amazon",
+      "input_per_m": 0.3,
+      "output_per_m": 2.5,
+      "blend_per_m": 0.85,
+      "monthly_usd": 255.0,
+      "scores": {
+        "livecodebench": 71.0,
+        "bfcl": 60.3
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats",
+        "bfcl": "llm-stats BFCL-V4"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": null,
+      "benchlm_evidence_status": null,
+      "score_estimated": {
+        "livecodebench": false,
+        "bfcl": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "bfcl": {
+          "source": "public_curated",
+          "note": "llm-stats BFCL-V4",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen3.5 397B-A17B",
+      "provider": "Qwen",
+      "input_per_m": 0.39,
+      "output_per_m": 2.34,
+      "blend_per_m": 0.8775,
+      "monthly_usd": 263.25,
+      "scores": {
+        "swe_bench_verified": 76.4,
+        "bfcl": 72.9,
+        "livecodebench": 83.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats",
+        "bfcl": "llm-stats BFCL-V4"
+      },
+      "available_benches": 3,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "qwen3-5-397b",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": true,
+        "bfcl": false,
+        "livecodebench": true
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats | BenchLM evidenceStatus=estimated",
+          "estimated": true,
+          "benchlm_overlap": true
+        },
+        "bfcl": {
+          "source": "public_curated",
+          "note": "llm-stats BFCL-V4",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBenchV6",
+          "evidence_status": "estimated",
+          "estimated": true,
+          "note": "BenchLM coding.liveCodeBenchV6"
+        }
+      },
+      "estimated_fill_count": 1,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 2
+    },
+    {
+      "id": "z-ai/glm-4.5",
+      "name": "GLM-4.5",
+      "provider": "Zhipu",
+      "input_per_m": 0.6,
+      "output_per_m": 2.2,
+      "blend_per_m": 1.0,
+      "monthly_usd": 300.0,
+      "scores": {
+        "livecodebench": 72.9
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "glm-4-5",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "Kimi K2.6",
+      "provider": "Moonshot",
+      "input_per_m": 0.57,
+      "output_per_m": 2.4,
+      "blend_per_m": 1.0275,
+      "monthly_usd": 308.25,
+      "scores": {
+        "swe_bench_verified": 80.2,
+        "livecodebench": 89.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "kimi-2-6",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": true,
+        "livecodebench": true
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026 | BenchLM evidenceStatus=estimated",
+          "estimated": true,
+          "benchlm_overlap": true
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBenchV6",
+          "evidence_status": "estimated",
+          "estimated": true,
+          "note": "BenchLM coding.liveCodeBenchV6"
+        }
+      },
+      "estimated_fill_count": 1,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 2
+    },
+    {
+      "id": "google/gemini-3-flash-preview",
+      "name": "Gemini 3 Flash",
+      "provider": "Google",
+      "input_per_m": 0.5,
+      "output_per_m": 3.0,
+      "blend_per_m": 1.125,
+      "monthly_usd": 337.5,
+      "scores": {
+        "swe_bench_verified": 78.0
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gemini-3-flash",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "Kimi K2.5",
+      "provider": "Moonshot",
+      "input_per_m": 0.57,
+      "output_per_m": 2.85,
+      "blend_per_m": 1.14,
+      "monthly_usd": 342.0,
+      "scores": {
+        "swe_bench_verified": 76.8,
+        "livecodebench": 85.0
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "kimi-k2-5",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "benchlm",
+          "field": "coding.liveCodeBenchV6",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.liveCodeBenchV6"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-haiku-4.5",
+      "name": "Claude Haiku 4.5",
+      "provider": "Anthropic",
+      "input_per_m": 1.0,
+      "output_per_m": 5.0,
+      "blend_per_m": 2.0,
+      "monthly_usd": 600.0,
+      "scores": {
+        "swe_bench_verified": 73.3
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "claude-haiku-4-5",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": true
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026 | BenchLM evidenceStatus=estimated",
+          "estimated": true,
+          "benchlm_overlap": true
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 1
+    },
+    {
+      "id": "x-ai/grok-4.5",
+      "name": "Grok 4.5",
+      "provider": "xAI",
+      "input_per_m": 2.0,
+      "output_per_m": 6.0,
+      "blend_per_m": 3.0,
+      "monthly_usd": 900.0,
+      "scores": {
+        "livecodebench": 79.0
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats Grok-4 score mapped to OpenRouter grok-4.5 endpoint"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "grok-4-5",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats Grok-4 score mapped to OpenRouter grok-4.5 endpoint",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "name": "Gemini 2.5 Pro",
+      "provider": "Google",
+      "input_per_m": 1.25,
+      "output_per_m": 10.0,
+      "blend_per_m": 3.4375,
+      "monthly_usd": 1031.25,
+      "scores": {
+        "mbpp": 91.01,
+        "livecodebench": 69.0,
+        "swe_bench_verified": 63.8
+      },
+      "score_notes": {
+        "livecodebench": "llm-stats (Gemini 2.5 Pro Preview 06-05)",
+        "mbpp": "GenAIList sanitized"
+      },
+      "available_benches": 3,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gemini-2-5-pro",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "mbpp": false,
+        "livecodebench": false,
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "mbpp": {
+          "source": "public_curated",
+          "note": "GenAIList sanitized",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "llm-stats (Gemini 2.5 Pro Preview 06-05)",
+          "estimated": false
+        },
+        "swe_bench_verified": {
+          "source": "benchlm",
+          "field": "coding.sweVerified",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.sweVerified"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-5.1",
+      "name": "GPT-5.1",
+      "provider": "OpenAI",
+      "input_per_m": 1.25,
+      "output_per_m": 10.0,
+      "blend_per_m": 3.4375,
+      "monthly_usd": 1031.25,
+      "scores": {
+        "swe_bench_verified": 76.3
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gpt-5-1",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "GPT-4.1",
+      "provider": "OpenAI",
+      "input_per_m": 2.0,
+      "output_per_m": 8.0,
+      "blend_per_m": 3.5,
+      "monthly_usd": 1050.0,
+      "scores": {
+        "niah": 80.0,
+        "swe_bench_verified": 54.6
+      },
+      "score_notes": {
+        "niah": "MRCR-style long-context report (Awesome Agents)"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gpt-4-1",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "niah": false,
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "niah": {
+          "source": "public_curated",
+          "note": "MRCR-style long-context report (Awesome Agents)",
+          "estimated": false
+        },
+        "swe_bench_verified": {
+          "source": "benchlm",
+          "field": "coding.sweVerified",
+          "evidence_status": "supported",
+          "estimated": false,
+          "note": "BenchLM coding.sweVerified"
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 1,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-4o",
+      "name": "GPT-4o",
+      "provider": "OpenAI",
+      "input_per_m": 2.5,
+      "output_per_m": 10.0,
+      "blend_per_m": 4.375,
+      "monthly_usd": 1312.5,
+      "scores": {
+        "humaneval": 90.2
+      },
+      "score_notes": {
+        "humaneval": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gpt-4o",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "humaneval": false
+      },
+      "score_provenance": {
+        "humaneval": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview",
+      "name": "Gemini 3.1 Pro",
+      "provider": "Google",
+      "input_per_m": 2.0,
+      "output_per_m": 12.0,
+      "blend_per_m": 4.5,
+      "monthly_usd": 1350.0,
+      "scores": {
+        "swe_bench_verified": 80.6,
+        "humaneval": 93.0,
+        "livecodebench": 69.5
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026",
+        "humaneval": "TokenMix 2026",
+        "livecodebench": "TokenMix 2026"
+      },
+      "available_benches": 3,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gemini-3-1-pro",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "humaneval": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        },
+        "humaneval": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "name": "GPT-5.2",
+      "provider": "OpenAI",
+      "input_per_m": 1.75,
+      "output_per_m": 14.0,
+      "blend_per_m": 4.8125,
+      "monthly_usd": 1443.75,
+      "scores": {
+        "swe_bench_verified": 80.0,
+        "niah": 98.0
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026",
+        "niah": "MRCR/NIAH-style 4-needle ~256K report (Awesome Agents)"
+      },
+      "available_benches": 2,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gpt-5-2",
+      "benchlm_evidence_status": "estimated",
+      "score_estimated": {
+        "swe_bench_verified": true,
+        "niah": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026 | BenchLM evidenceStatus=estimated",
+          "estimated": true,
+          "benchlm_overlap": true
+        },
+        "niah": {
+          "source": "public_curated",
+          "note": "MRCR/NIAH-style 4-needle ~256K report (Awesome Agents)",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 1
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "GPT-5.4",
+      "provider": "OpenAI",
+      "input_per_m": 2.5,
+      "output_per_m": 15.0,
+      "blend_per_m": 5.625,
+      "monthly_usd": 1687.5,
+      "scores": {
+        "swe_bench_verified": 80.0,
+        "humaneval": 94.5,
+        "livecodebench": 71.3
+      },
+      "score_notes": {
+        "swe_bench_verified": "TokenMix 2026",
+        "humaneval": "TokenMix 2026",
+        "livecodebench": "TokenMix 2026"
+      },
+      "available_benches": 3,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "gpt-5-4",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false,
+        "humaneval": false,
+        "livecodebench": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        },
+        "humaneval": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        },
+        "livecodebench": {
+          "source": "public_curated",
+          "note": "TokenMix 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "provider": "Anthropic",
+      "input_per_m": 3.0,
+      "output_per_m": 15.0,
+      "blend_per_m": 6.0,
+      "monthly_usd": 1800.0,
+      "scores": {
+        "swe_bench_verified": 79.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "claude-sonnet-4-6",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "name": "Claude Opus 4.8",
+      "provider": "Anthropic",
+      "input_per_m": 5.0,
+      "output_per_m": 25.0,
+      "blend_per_m": 10.0,
+      "monthly_usd": 3000.0,
+      "scores": {
+        "swe_bench_verified": 88.6
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "claude-opus-4-8",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    },
+    {
+      "id": "anthropic/claude-fable-5",
+      "name": "Claude Fable 5",
+      "provider": "Anthropic",
+      "input_per_m": 10.0,
+      "output_per_m": 50.0,
+      "blend_per_m": 20.0,
+      "monthly_usd": 6000.0,
+      "scores": {
+        "swe_bench_verified": 95.0
+      },
+      "score_notes": {
+        "swe_bench_verified": "llm-stats Aug 2026"
+      },
+      "available_benches": 1,
+      "frontier_on": [],
+      "frontier_count": 0,
+      "composite": 0.0,
+      "benchlm_slug": "claude-fable",
+      "benchlm_evidence_status": "supported",
+      "score_estimated": {
+        "swe_bench_verified": false
+      },
+      "score_provenance": {
+        "swe_bench_verified": {
+          "source": "public_curated",
+          "note": "llm-stats Aug 2026",
+          "estimated": false
+        }
+      },
+      "estimated_fill_count": 0,
+      "benchlm_fill_count": 0,
+      "frontier_estimated_count": 0,
+      "estimated_score_count": 0
+    }
+  ],
+  "composite_ranking": [
+    {
+      "rank": 1,
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "frontier_count": 3,
+      "available_benches": 3,
+      "composite": 1.0,
+      "monthly_usd": 163.12,
+      "blend_per_m": 0.5437,
+      "frontier_on": [
+        "swe_bench_verified",
+        "livecodebench",
+        "humaneval"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 2,
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "frontier_count": 2,
+      "available_benches": 2,
+      "composite": 1.0,
+      "monthly_usd": 33.08,
+      "blend_per_m": 0.1103,
+      "frontier_on": [
+        "swe_bench_verified",
+        "livecodebench"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": null
+    },
+    {
+      "rank": 3,
+      "id": "openai/gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "frontier_count": 2,
+      "available_benches": 2,
+      "composite": 1.0,
+      "monthly_usd": 78.75,
+      "blend_per_m": 0.2625,
+      "frontier_on": [
+        "humaneval",
+        "mbpp"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 4,
+      "id": "meta-llama/llama-4-scout",
+      "name": "Llama 4 Scout",
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "monthly_usd": 45.0,
+      "blend_per_m": 0.15,
+      "frontier_on": [
+        "niah"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 5,
+      "id": "minimax/minimax-m2.5",
+      "name": "MiniMax M2.5",
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "monthly_usd": 117.0,
+      "blend_per_m": 0.39,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 6,
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax M3",
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "monthly_usd": 157.5,
+      "blend_per_m": 0.525,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 7,
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "monthly_usd": 1200.0,
+      "blend_per_m": 4.0,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_estimated_count": 1,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 1,
+      "benchlm_evidence_status": "estimated"
+    },
+    {
+      "rank": 8,
+      "id": "anthropic/claude-opus-5",
+      "name": "Claude Opus 5",
+      "frontier_count": 1,
+      "available_benches": 1,
+      "composite": 1.0,
+      "monthly_usd": 3000.0,
+      "blend_per_m": 10.0,
+      "frontier_on": [
+        "swe_bench_verified"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 9,
+      "id": "qwen/qwen3.5-27b",
+      "name": "Qwen3.5 27B",
+      "frontier_count": 1,
+      "available_benches": 2,
+      "composite": 0.5,
+      "monthly_usd": 160.88,
+      "blend_per_m": 0.5363,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 1,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 10,
+      "id": "openai/gpt-4-turbo",
+      "name": "GPT-4 Turbo",
+      "frontier_count": 1,
+      "available_benches": 2,
+      "composite": 0.5,
+      "monthly_usd": 4500.0,
+      "blend_per_m": 15.0,
+      "frontier_on": [
+        "ruler"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 11,
+      "id": "qwen/qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 168.0,
+      "blend_per_m": 0.56,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 1,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 12,
+      "id": "moonshotai/kimi-k2-0905",
+      "name": "Kimi K2 0905",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 322.5,
+      "blend_per_m": 1.075,
+      "frontier_on": [
+        "mbpp"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 13,
+      "id": "qwen/qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 663.75,
+      "blend_per_m": 2.2125,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 1,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 14,
+      "id": "openai/gpt-5",
+      "name": "GPT-5",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 1031.25,
+      "blend_per_m": 3.4375,
+      "frontier_on": [
+        "mbpp"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": null
+    },
+    {
+      "rank": 15,
+      "id": "anthropic/claude-opus-4.6",
+      "name": "Claude Opus 4.6",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 3000.0,
+      "blend_per_m": 10.0,
+      "frontier_on": [
+        "humaneval"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 0,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    },
+    {
+      "rank": 16,
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Claude Opus 4.5",
+      "frontier_count": 1,
+      "available_benches": 3,
+      "composite": 0.3333,
+      "monthly_usd": 3000.0,
+      "blend_per_m": 10.0,
+      "frontier_on": [
+        "bfcl"
+      ],
+      "frontier_estimated_count": 0,
+      "benchlm_fill_count": 1,
+      "estimated_fill_count": 0,
+      "estimated_score_count": 0,
+      "benchlm_evidence_status": "supported"
+    }
+  ],
+  "fills": [
+    {
+      "id": "qwen/qwen3.5-27b",
+      "bench": "swe_bench_verified",
+      "score": 72.4,
+      "estimated": false,
+      "field": "coding.sweVerified",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "bench": "livecodebench",
+      "score": 89.6,
+      "estimated": false,
+      "field": "coding.liveCodeBench",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "qwen/qwen3.7-max",
+      "bench": "livecodebench",
+      "score": 91.6,
+      "estimated": false,
+      "field": "coding.liveCodeBench",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "bench": "livecodebench",
+      "score": 84.8,
+      "estimated": false,
+      "field": "coding.liveCodeBenchV6",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3-0324",
+      "bench": "swe_bench_verified",
+      "score": 42.0,
+      "estimated": false,
+      "field": "coding.sweVerified",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "bench": "livecodebench",
+      "score": 87.1,
+      "estimated": false,
+      "field": "coding.liveCodeBenchV6",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "bench": "livecodebench",
+      "score": 84.9,
+      "estimated": false,
+      "field": "coding.liveCodeBench",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "bench": "livecodebench",
+      "score": 83.6,
+      "estimated": true,
+      "field": "coding.liveCodeBenchV6",
+      "evidence_status": "estimated"
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "bench": "livecodebench",
+      "score": 89.6,
+      "estimated": true,
+      "field": "coding.liveCodeBenchV6",
+      "evidence_status": "estimated"
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "bench": "livecodebench",
+      "score": 85.0,
+      "estimated": false,
+      "field": "coding.liveCodeBenchV6",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "bench": "swe_bench_verified",
+      "score": 63.8,
+      "estimated": false,
+      "field": "coding.sweVerified",
+      "evidence_status": "supported"
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "bench": "swe_bench_verified",
+      "score": 54.6,
+      "estimated": false,
+      "field": "coding.sweVerified",
+      "evidence_status": "supported"
+    }
+  ],
+  "frontiers_public_only": null
+}

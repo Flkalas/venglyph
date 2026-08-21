@@ -1,0 +1,455 @@
+{
+  "meta": {
+    "collected_at": "2026-08-06",
+    "subset": "TB \u2229 BrowseComp \u2229 deepSwe",
+    "n_models": 5,
+    "benchmarks": [
+      "terminal_bench_2",
+      "browsecomp",
+      "deep_swe"
+    ],
+    "labels": {
+      "terminal_bench_2": "Terminal-Bench 2.0",
+      "browsecomp": "BrowseComp",
+      "deep_swe": "deepSwe"
+    },
+    "assumptions": {
+      "monthly": "225*input + 75*output at OpenRouter list $/1M",
+      "joint": "non-dominated on (TB\u2191, Browse\u2191, deepSwe\u2191, cost\u2193)"
+    },
+    "sources": [
+      "https://benchlm.ai/data/models.json",
+      "https://openrouter.ai/api/v1/models"
+    ],
+    "caveats": [
+      "deepSwe coverage is sparse (few models publish it).",
+      "Luna/Terra evidenceStatus may be estimated.",
+      "DeepSeek effort variants share base SKU price."
+    ]
+  },
+  "frontiers": {
+    "terminal_bench_2": [
+      "deepseek/deepseek-v4-flash",
+      "moonshotai/kimi-k3",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra"
+    ],
+    "browsecomp": [
+      "deepseek/deepseek-v4-flash",
+      "moonshotai/kimi-k3",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra"
+    ],
+    "deep_swe": [
+      "deepseek/deepseek-v4-flash",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra"
+    ]
+  },
+  "joint_pareto": [
+    "deepseek/deepseek-v4-flash",
+    "moonshotai/kimi-k3",
+    "openai/gpt-5.6-luna",
+    "openai/gpt-5.6-sol",
+    "openai/gpt-5.6-terra"
+  ],
+  "models": [
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek: DeepSeek V4 Flash 0423",
+      "benchlm_slug": "deepseek-v4-flash-max",
+      "monthly_usd": 33.08,
+      "blend_per_m": 0.11025,
+      "estimated": false,
+      "evidence_status": null,
+      "joint_pareto": true,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp",
+        "deep_swe"
+      ],
+      "frontier_count": 3,
+      "rank": 1,
+      "map_note": "BenchLM slug 'deepseek-v4-flash-max' \u2192 base OpenRouter SKU",
+      "terminal_bench_2": 56.9,
+      "browsecomp": 73.2,
+      "deep_swe": 54.4
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "OpenAI: GPT-5.6 Luna",
+      "benchlm_slug": "gpt-5-6-luna",
+      "monthly_usd": 67.5,
+      "blend_per_m": 0.225,
+      "estimated": true,
+      "evidence_status": "estimated",
+      "joint_pareto": true,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp",
+        "deep_swe"
+      ],
+      "frontier_count": 3,
+      "rank": 2,
+      "map_note": null,
+      "terminal_bench_2": 84.7,
+      "browsecomp": 83.3,
+      "deep_swe": 67.2
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "OpenAI: GPT-5.6 Terra",
+      "benchlm_slug": "gpt-5-6-terra",
+      "monthly_usd": 675.0,
+      "blend_per_m": 2.25,
+      "estimated": true,
+      "evidence_status": "estimated",
+      "joint_pareto": true,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp",
+        "deep_swe"
+      ],
+      "frontier_count": 3,
+      "rank": 3,
+      "map_note": null,
+      "terminal_bench_2": 87.4,
+      "browsecomp": 87.5,
+      "deep_swe": 69.6
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "name": "OpenAI: GPT-5.6 Sol",
+      "benchlm_slug": "gpt-5-6-sol",
+      "monthly_usd": 3375.0,
+      "blend_per_m": 11.25,
+      "estimated": false,
+      "evidence_status": "supported",
+      "joint_pareto": true,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp",
+        "deep_swe"
+      ],
+      "frontier_count": 3,
+      "rank": 4,
+      "map_note": null,
+      "terminal_bench_2": 91.9,
+      "browsecomp": 92.2,
+      "deep_swe": 72.7
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "name": "MoonshotAI: Kimi K3",
+      "benchlm_slug": "kimi-3",
+      "monthly_usd": 1800.0,
+      "blend_per_m": 6.0,
+      "estimated": false,
+      "evidence_status": "supported",
+      "joint_pareto": true,
+      "frontier_on": [
+        "terminal_bench_2",
+        "browsecomp"
+      ],
+      "frontier_count": 2,
+      "rank": 5,
+      "map_note": null,
+      "terminal_bench_2": 88.3,
+      "browsecomp": 91.2,
+      "deep_swe": 67.5
+    }
+  ],
+  "residuals": {
+    "terminal_bench_2": {
+      "metric": "terminal_bench_2",
+      "label": "Terminal-Bench 2.0",
+      "full": {
+        "intercept": 48.7845,
+        "slope": 12.7512
+      },
+      "robust": {
+        "intercept": 48.7845,
+        "slope": 12.7512,
+        "n_fit": 5,
+        "rule": "drop resid0 < mean\u22122\u03c3 then refit"
+      },
+      "excluded": [],
+      "points": [
+        {
+          "name": "GPT-5.6 Luna",
+          "id": "openai/gpt-5.6-luna",
+          "monthly": 67.5,
+          "logCost": 1.8293,
+          "score": 84.7,
+          "pred": 72.11,
+          "resid": 12.59,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Terra",
+          "id": "openai/gpt-5.6-terra",
+          "monthly": 675.0,
+          "logCost": 2.8293,
+          "score": 87.4,
+          "pred": 84.86,
+          "resid": 2.54,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Sol",
+          "id": "openai/gpt-5.6-sol",
+          "monthly": 3375.0,
+          "logCost": 3.5283,
+          "score": 91.9,
+          "pred": 93.77,
+          "resid": -1.87,
+          "above": false,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "Kimi K3",
+          "id": "moonshotai/kimi-k3",
+          "monthly": 1800.0,
+          "logCost": 3.2553,
+          "score": 88.3,
+          "pred": 90.29,
+          "resid": -1.99,
+          "above": false,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "DeepSeek V4 Flash",
+          "id": "deepseek/deepseek-v4-flash",
+          "monthly": 33.08,
+          "logCost": 1.5196,
+          "score": 56.9,
+          "pred": 68.16,
+          "resid": -11.26,
+          "above": false,
+          "excluded_from_fit": false
+        }
+      ]
+    },
+    "browsecomp": {
+      "metric": "browsecomp",
+      "label": "BrowseComp",
+      "full": {
+        "intercept": 64.2738,
+        "slope": 8.1803
+      },
+      "robust": {
+        "intercept": 64.2738,
+        "slope": 8.1803,
+        "n_fit": 5,
+        "rule": "drop resid0 < mean\u22122\u03c3 then refit"
+      },
+      "excluded": [],
+      "points": [
+        {
+          "name": "GPT-5.6 Luna",
+          "id": "openai/gpt-5.6-luna",
+          "monthly": 67.5,
+          "logCost": 1.8293,
+          "score": 83.3,
+          "pred": 79.24,
+          "resid": 4.06,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "Kimi K3",
+          "id": "moonshotai/kimi-k3",
+          "monthly": 1800.0,
+          "logCost": 3.2553,
+          "score": 91.2,
+          "pred": 90.9,
+          "resid": 0.3,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Terra",
+          "id": "openai/gpt-5.6-terra",
+          "monthly": 675.0,
+          "logCost": 2.8293,
+          "score": 87.5,
+          "pred": 87.42,
+          "resid": 0.08,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Sol",
+          "id": "openai/gpt-5.6-sol",
+          "monthly": 3375.0,
+          "logCost": 3.5283,
+          "score": 92.2,
+          "pred": 93.14,
+          "resid": -0.94,
+          "above": false,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "DeepSeek V4 Flash",
+          "id": "deepseek/deepseek-v4-flash",
+          "monthly": 33.08,
+          "logCost": 1.5196,
+          "score": 73.2,
+          "pred": 76.7,
+          "resid": -3.5,
+          "above": false,
+          "excluded_from_fit": false
+        }
+      ]
+    },
+    "deep_swe": {
+      "metric": "deep_swe",
+      "label": "deepSwe",
+      "full": {
+        "intercept": 49.8753,
+        "slope": 6.3281
+      },
+      "robust": {
+        "intercept": 49.8753,
+        "slope": 6.3281,
+        "n_fit": 5,
+        "rule": "drop resid0 < mean\u22122\u03c3 then refit"
+      },
+      "excluded": [],
+      "points": [
+        {
+          "name": "GPT-5.6 Luna",
+          "id": "openai/gpt-5.6-luna",
+          "monthly": 67.5,
+          "logCost": 1.8293,
+          "score": 67.2,
+          "pred": 61.45,
+          "resid": 5.75,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Terra",
+          "id": "openai/gpt-5.6-terra",
+          "monthly": 675.0,
+          "logCost": 2.8293,
+          "score": 69.6,
+          "pred": 67.78,
+          "resid": 1.82,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "GPT-5.6 Sol",
+          "id": "openai/gpt-5.6-sol",
+          "monthly": 3375.0,
+          "logCost": 3.5283,
+          "score": 72.7,
+          "pred": 72.2,
+          "resid": 0.5,
+          "above": true,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "Kimi K3",
+          "id": "moonshotai/kimi-k3",
+          "monthly": 1800.0,
+          "logCost": 3.2553,
+          "score": 67.5,
+          "pred": 70.48,
+          "resid": -2.98,
+          "above": false,
+          "excluded_from_fit": false
+        },
+        {
+          "name": "DeepSeek V4 Flash",
+          "id": "deepseek/deepseek-v4-flash",
+          "monthly": 33.08,
+          "logCost": 1.5196,
+          "score": 54.4,
+          "pred": 59.49,
+          "resid": -5.09,
+          "above": false,
+          "excluded_from_fit": false
+        }
+      ]
+    }
+  },
+  "mean_residual_rank": [
+    {
+      "name": "GPT-5.6 Luna",
+      "id": "openai/gpt-5.6-luna",
+      "mean_resid": 7.47,
+      "tb_resid": 12.59,
+      "bc_resid": 4.06,
+      "ds_resid": 5.75,
+      "monthly": 67.5,
+      "joint_pareto": true,
+      "estimated": true,
+      "tb": 84.7,
+      "bc": 83.3,
+      "ds": 67.2
+    },
+    {
+      "name": "GPT-5.6 Terra",
+      "id": "openai/gpt-5.6-terra",
+      "mean_resid": 1.48,
+      "tb_resid": 2.54,
+      "bc_resid": 0.08,
+      "ds_resid": 1.82,
+      "monthly": 675.0,
+      "joint_pareto": true,
+      "estimated": true,
+      "tb": 87.4,
+      "bc": 87.5,
+      "ds": 69.6
+    },
+    {
+      "name": "GPT-5.6 Sol",
+      "id": "openai/gpt-5.6-sol",
+      "mean_resid": -0.77,
+      "tb_resid": -1.87,
+      "bc_resid": -0.94,
+      "ds_resid": 0.5,
+      "monthly": 3375.0,
+      "joint_pareto": true,
+      "estimated": false,
+      "tb": 91.9,
+      "bc": 92.2,
+      "ds": 72.7
+    },
+    {
+      "name": "Kimi K3",
+      "id": "moonshotai/kimi-k3",
+      "mean_resid": -1.56,
+      "tb_resid": -1.99,
+      "bc_resid": 0.3,
+      "ds_resid": -2.98,
+      "monthly": 1800.0,
+      "joint_pareto": true,
+      "estimated": false,
+      "tb": 88.3,
+      "bc": 91.2,
+      "ds": 67.5
+    },
+    {
+      "name": "DeepSeek V4 Flash",
+      "id": "deepseek/deepseek-v4-flash",
+      "mean_resid": -6.62,
+      "tb_resid": -11.26,
+      "bc_resid": -3.5,
+      "ds_resid": -5.09,
+      "monthly": 33.08,
+      "joint_pareto": true,
+      "estimated": false,
+      "tb": 56.9,
+      "bc": 73.2,
+      "ds": 54.4
+    }
+  ]
+}
