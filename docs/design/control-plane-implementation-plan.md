@@ -1,6 +1,6 @@
 # 제어평면 구현 계획서 (M0–M2)
 
-> 상태: 계획 **v1** — 2026-08-20  
+> 상태: 계획 **v1.1** — 2026-08-21 (프로바이더: 로컬 llmster)  
 > 제품: **[VenGlyph](./venglyph-naming.md)**  
 > 상위 설계: [personal-llm-work-hub.md](./personal-llm-work-hub.md) (v3.5). 이 문서는 그 7장(시작 지점)을 **실행 가능한 단위**로 쪼갠 것이다.  
 > 범위: **제어평면 + 로컬 Worker + CLI**. 지식원천(Knowledge 인제스트·승격 루프·임베딩 검색)은 **이 계획서 밖**.
@@ -25,11 +25,11 @@
 
 | 항목 | 결정 | 근거 / 대안을 버린 이유 |
 | --- | --- | --- |
-| 코드 위치 | 이 레포 `src/**`, CLI `venglyph` | 관제·Worker·CLI는 VenGlyph. 1min 어댑터는 형제 레포 `one-min-mcp`에서 재사용(패키지/경로 연결) |
-| 런타임 | Node 24 + TypeScript + Hono | `one-min-mcp`와 동일 계열 스택 |
+| 코드 위치 | 이 레포 `src/**`, CLI `venglyph` | 관제·Worker·CLI는 VenGlyph. LLM은 OpenAI 호환 클라이언트로 이 레포에 둠 |
+| 런타임 | Node 24 + TypeScript + Hono | 형제 스택과 동일 계열 |
 | Store | **`node:sqlite`** (내장, WAL) 단일 파일 | 의존성 0. Postgres 교체는 4.2 Memory 계약 뒤에서 |
 | 검색 | M1은 `LIKE` 한 줄 스텁 | 인덱스 설계를 소비 패턴보다 먼저 하지 않는다. FTS5/임베딩은 M2+ |
-| 프로바이더 | 1min 하나 (`one-min-mcp`의 `OneMinClient`) | Auto는 M2 규칙표까지 스텁 |
+| 프로바이더 | **로컬 llmster / LM Studio** (`HUB_LLM_BASE_URL`, 기본 `http://127.0.0.1:1234/v1`) · 기본 모델 `qwen/qwen3.5-9b` | OpenAI `chat.completions` + 네이티브 `tool_calls`. 1min은 후속. Auto는 M2까지 스텁 |
 | Worker 링크 | **아웃바운드 WebSocket only** (Worker → 관제) | 상위 Q2 결정. NAT·방화벽 뒤에서 동작. 관제가 Worker로 접속 시도 안 함 |
 | 첫 표면 | **CLI** | 상위 Q3 결정. 스킨 패턴을 UI 비용 없이 검증하는 유일한 표면 |
 | 세션 키 | `workspace` 절대경로 + `channel` | 재개 조건이 "같은 폴더에서 다시 열기"이므로 |
@@ -43,7 +43,7 @@ CLI (src/cli/)                    로컬 Worker (src/worker/)
 │ routes: sessions · chat · records · worker(ws)    │
 │ store: node:sqlite  (records · messages · links)  │
 │ assemble: 현재 세션 + LIKE 검색 (예산 truncate)   │
-│ route: Auto 스텁 → OneMinClient (one-min-mcp)     │
+│ route: Auto 스텁 → llmster OpenAI 호환            │
 │ dispatch: tool_calls → danger-gate → Worker       │
 └───────────────────────────────────────────────────┘
 ```
@@ -146,7 +146,7 @@ Worker가 접속하고, 관제가 `invoke`를 내려보낸다. Worker는 **절�
 | `src/server/{app,store,schema}.ts` | Hono 앱, `node:sqlite` 마이그레이션, `/healthz` |
 | `src/server/dangerGate.ts` (+`.test.ts`) | 3-tier 규칙, deny 패턴 |
 | `src/cli.ts` | `venglyph` / `hub` 서브커맨드 |
-| `.env.example` | `HUB_DB_PATH`, `HUB_PORT`, `HUB_WORKER_TOKEN`, `HUB_FA` |
+| `.env.example` | `HUB_DB_PATH`, `HUB_PORT`, `HUB_WORKER_TOKEN`, `HUB_FA`, `HUB_LLM_BASE_URL`, `HUB_LLM_MODEL` |
 
 **수용:** `pnpm dev:hub` → `/healthz` 200, DB 파일 생성, `node --test`로 danger-gate 규칙 통과.
 
@@ -156,7 +156,8 @@ Worker가 접속하고, 관제가 `invoke`를 내려보낸다. Worker는 **절�
 | --- | --- |
 | `src/server/routes/{sessions,chat,records,workers}.ts` | 3.1 계약 |
 | `src/server/assemble.ts` | 현재 세션 turn + LIKE 검색 결과를 토큰 예산 안에서 `messages[]` 조립 (초과는 오래된 것부터 truncate) |
-| `src/server/route.ts` | Auto **스텁**: 기본 모델 1개, `code` 힌트면 code 모델 |
+| `src/server/route.ts` | Auto **스텁**: 기본 `HUB_LLM_MODEL`, `code` 힌트면 로컬 code 모델 id(없으면 동일) |
+| `src/server/llm.ts` | OpenAI 호환 `chat.completions` 스트림 (`fetch`) + 네이티브 `tool_calls` |
 | `src/server/dispatch.ts` | `tool_calls` → danger-gate → Worker `invoke` → `role: tool` append → 루프 |
 | `src/worker/{index,ws,tools}.ts` | 아웃바운드 ws, `fs.read`/`fs.write`/`shell.exec`, workspace 샌드박스 |
 | `src/cli/` | `hub chat` — SSE 소비, `confirm` 프롬프트, `--workspace` 기본 cwd |
@@ -184,7 +185,7 @@ Worker가 접속하고, 관제가 `invoke`를 내려보낸다. Worker는 **절�
 
 ```text
 src/
-  server/  app.ts store.ts schema.ts assemble.ts route.ts dispatch.ts
+  server/  app.ts store.ts schema.ts assemble.ts route.ts llm.ts dispatch.ts
            dangerGate.ts(+test)  routes/{sessions,chat,records,workers,workerWs}.ts
   worker/  index.ts ws.ts tools.ts sandbox.ts
   cli/     index.ts sse.ts
@@ -192,7 +193,7 @@ src/
 ```
 
 `shared/protocol.ts`를 zod로 한 곳에 두는 것이 이 스파이크의 유일한 "구조적" 투자다. 프레임 계약이 곧 검증 대상이므로.  
-1min 호출·tools protocol은 형제 `one-min-mcp`의 클라이언트를 의존으로 쓴다 (이 레포에 복제하지 않음).
+LLM은 관제가 llmster OpenAI 호환 API를 직접 호출한다 (`HUB_LLM_BASE_URL` / `HUB_LLM_MODEL`). 1min/`one-min-mcp`는 M1 비범위.
 
 ---
 
@@ -200,7 +201,7 @@ src/
 
 | 리스크 | 신호 | 대응 |
 | --- | --- | --- |
-| 1min이 네이티브 `tool_calls` 없음 (`one-min-mcp` `docs/gateway/tools-protocol-experiment.md`) | 루프가 안 돎 | `ONEMIN_TOOLS_PROTOCOL=json` 경로 재사용. M1 수용 기준을 이 모드로 측정 |
+| llmster 미기동·모델 unload | chat/health 실패 | 수용 전 `GET {base}/models` 확인. 에러 메시지를 endpoint·model id로 명확히 |
 | `node:sqlite` FTS5 미포함 가능 | M2 검색 승격 막힘 | M1은 LIKE라 영향 없음. M2 착수 전 1줄 프로브로 확인, 없으면 `better-sqlite3` 또는 외부 인덱스 |
 | WebSocket 서버 | Hono/node-server 위 ws 업그레이드 | `@hono/node-ws` 또는 `ws` 직결. 안 되면 M1은 롱폴 `GET /worker/next` + `POST /worker/result`로 대체 (계약 동일) |
 | 스코프 크립 | Knowledge 인제스트·VS Code UI에 손이 감 | 상위 문서 7.1 "시작 단계에서 하지 말 것" 목록을 리뷰 체크리스트로 씀 |
@@ -210,9 +211,9 @@ src/
 
 | 상위 Q | 상태 |
 | --- | --- |
-| Q1 LLM 호출 항상 원격 | **닫음** — 예, 관제만 프로바이더를 호출 |
+| Q1 LLM 호출은 관제만 | **닫음** — 예. M1 프로바이더는 로컬 llmster (관제가 `127.0.0.1:1234` 호출) |
 | Q2 페어링 | **닫음** — 아웃바운드 only |
 | Q3 첫 채널 | **닫음** — CLI |
 | Q4 루프 위치 | **잠정** — 관제 오케스트 + Worker executor |
 | Q6 Auto 규칙표 · Q8 원격 루트 | M2 착수 시 |
-| Q5 one-min MCP 축소 목록 · Q7 검색 방식 · Q9 승격 트리거 | **미정 (의도적)** — M1 사용 로그를 보고 결정 |
+| Q5 멀티프로바이더(1min 등) · Q7 검색 방식 · Q9 승격 트리거 | **미정 (의도적)** — M1 사용 로그를 보고 결정 |

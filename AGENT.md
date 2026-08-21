@@ -72,4 +72,4 @@ chore: ignore sqlite files
 - 제품명: **VenGlyph** — [docs/design/venglyph-naming.md](docs/design/venglyph-naming.md).
 - 설계: [docs/design/personal-llm-work-hub.md](docs/design/personal-llm-work-hub.md).
 - 구현 계획: [docs/design/control-plane-implementation-plan.md](docs/design/control-plane-implementation-plan.md).
-- 형제 레포 `one-min-mcp`: 1min 프로바이더 어댑터·OpenAI/MCP 게이트웨이 (이 레포의 LLM 창구로 재사용).
+- 형제 레포 `one-min-mcp`: 1min 프로바이더 어댑터·OpenAI/MCP 게이트웨이 (후속 멀티프로바이더용). M1 LLM은 로컬 llmster.
