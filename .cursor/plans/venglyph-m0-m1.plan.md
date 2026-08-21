@@ -1,28 +1,28 @@
 ---
 name: VenGlyph M0 M1
-overview: 제어평면 M0(골격·게이트) → M1(세션 SSOT·로컬 Worker·CLI chat)까지 구현해, 설계서 수용 기준 5개가 로컬에서 통과하는 상태를 목표로 한다.
+overview: 제어평면 M0(골격·게이트) → M1(세션 SSOT·로컬 Worker·CLI chat)까지 구현해, 설계서 수용 기준 5개가 로컬에서 통과하는 상태를 목표로 한다. LLM은 llmster(LM Studio) OpenAI 호환 엔드포인트.
 todos:
   - id: m0-skeleton
     content: "M0: schema/store/app healthz + env/scripts + CLI entry"
-    status: pending
+    status: completed
   - id: m0-danger-gate
     content: "M0: dangerGate 3-tier + unit tests"
-    status: pending
+    status: completed
   - id: m1-protocol-routes
     content: "M1: shared/protocol zod + sessions/chat/records/workers HTTP"
-    status: pending
+    status: completed
   - id: m1-orchestrate
-    content: "M1: assemble + route stub + dispatch loop (tools json)"
-    status: pending
+    content: "M1: assemble + route stub + dispatch loop (OpenAI tool_calls)"
+    status: completed
   - id: m1-worker
     content: "M1: outbound WS worker + fs/shell sandbox"
-    status: pending
+    status: completed
   - id: m1-cli
     content: "M1: hub chat SSE + confirm + hub worker CLI"
-    status: pending
+    status: completed
   - id: m1-accept
     content: "M1: 수용 기준 5개 로컬 검증"
-    status: pending
+    status: completed
 isProject: true
 ---
 
@@ -37,7 +37,7 @@ isProject: true
 - 위치: 이 레포 `src/server/**`, `src/worker/**`, `src/cli/**`, CLI bin `venglyph`
 - Store: `node:sqlite` WAL 단일 파일 (`HUB_DB_PATH`)
 - HTTP: Hono + `@hono/node-server` + `streamSSE`
-- LLM: 형제 레포 `one-min-mcp`의 `OneMinClient` + `ONEMIN_TOOLS_PROTOCOL=json` (이 레포에 복제하지 않음)
+- LLM: **로컬 llmster / LM Studio** OpenAI 호환 (`HUB_LLM_BASE_URL`, 기본 `http://127.0.0.1:1234/v1`) + 모델 `HUB_LLM_MODEL` (기본 `qwen/qwen3.5-9b`). 네이티브 `tool_calls` 사용. 1min/`one-min-mcp`는 M1 비범위
 - Worker 링크: 아웃바운드 WebSocket only — 의존성 `ws` 추가, 서버는 upgrade 핸들러로 `/v1/hub/worker` 연결 (Hono fetch와 병행)
 - FA: `HUB_FA`는 `confirm`만 자동 승인, `deny`는 불가
 
@@ -45,12 +45,12 @@ isProject: true
 sequenceDiagram
   participant CLI
   participant Hub
-  participant OneMin
+  participant Llmster
   participant Worker
   CLI->>Hub: POST /v1/hub/chat SSE
   Hub->>Hub: assemble + route
-  Hub->>OneMin: chatStream tools_protocol=json
-  OneMin-->>Hub: text tool_calls
+  Hub->>Llmster: POST /v1/chat/completions stream+tools
+  Llmster-->>Hub: delta tool_calls
   Hub->>Hub: dangerGate
   alt confirm
     Hub-->>CLI: confirm frame
@@ -72,7 +72,7 @@ sequenceDiagram
 | `src/server/app.ts` | Hono app, `GET /v1/hub/healthz` |
 | `src/server/dangerGate.ts` + `.test.ts` | allow / confirm / deny |
 | `src/cli.ts` / `src/cli/` | 서버 기동 · `hub` 서브커맨드 stub |
-| `.env.example` + README | `HUB_DB_PATH`, `HUB_PORT`, `HUB_WORKER_TOKEN`, `HUB_FA` |
+| `.env.example` + README | `HUB_DB_PATH`, `HUB_PORT`, `HUB_WORKER_TOKEN`, `HUB_FA`, `HUB_LLM_BASE_URL`, `HUB_LLM_MODEL` |
 | `package.json` | `dev:hub`, test 경로에 dangerGate 추가 |
 
 수용: `pnpm dev:hub` → healthz 200, DB 파일 생성, `pnpm test`로 gate 통과.
@@ -96,7 +96,8 @@ sequenceDiagram
 ### 3. 오케스트레이션
 
 - `assemble.ts` — 현재 세션 turns + LIKE 결과, 토큰 예산 초과 시 오래된 턴부터 truncate
-- `route.ts` — Auto 스텁: 기본 chat 모델, `code` 힌트면 code 모델
+- `route.ts` — Auto 스텁: 기본 `HUB_LLM_MODEL` (`qwen/qwen3.5-9b`), `code` 힌트면 같은 로컬 엔드포인트의 code용 모델 id(환경변수, 없으면 기본과 동일)
+- `llm.ts` — OpenAI 호환 `chat.completions` 스트림 클라이언트 (`fetch`), `tools` + 네이티브 `tool_calls` 파싱
 - `dispatch.ts` — parse tool_calls → dangerGate → Worker invoke → `role:tool` append → 루프 (confirm은 SSE로 막고 재개)
 
 ### 4. Worker
@@ -118,6 +119,8 @@ sequenceDiagram
 
 ## 수용 기준 (완료 정의)
 
+전제: llmster/`lms server`가 `HUB_LLM_BASE_URL`에서 응답하고, 대상 모델이 load되어 있을 것.
+
 1. `hub worker --workspace <dir>` → `GET /workers` online
 2. `hub chat` “README 첫 줄” → `fs.read` 반영
 3. “파일 하나 만들어” → confirm → 로컬 생성
@@ -129,10 +132,12 @@ sequenceDiagram
 - Knowledge ingest, embedding, links 채우기, 승격 루프
 - Auto 규칙표 본문, 원격 Worker, 웹/TG 채널, FTS5
 - Pi 임베드
+- 1min / `one-min-mcp` 프로바이더 (후속 멀티프로바이더에서)
 
 ## 리스크 대응 (계획서 6장)
 
-- 1min native tool_calls 없음 → **항상** `ONEMIN_TOOLS_PROTOCOL=json`으로 M1 측정
+- llmster 미기동·모델 unload → healthz/chat가 명확한 에러; 수용 전 `GET /v1/models`로 사전 확인
+- 로컬 모델 tool_calls 품질 편차 → schema를 엄격히 두고, 파싱 실패 시 세션에 기록 후 사용자에게 재시도 유도
 - WS upgrade 난항 시 → 같은 zod 계약으로 롱폴 `GET /worker/next` + `POST /worker/result`로 대체 (계약 유지, 구현만 교체)
 
 ## AGENT.md 준수
