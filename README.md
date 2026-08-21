@@ -9,7 +9,7 @@
 | [docs/design/control-plane-implementation-plan.md](docs/design/control-plane-implementation-plan.md) | 제어평면 M0–M2 |
 | [docs/notes/google-ai/](docs/notes/google-ai/) | 설계 탐색 메모 |
 | [docs/benchmarks/](docs/benchmarks/) | LLM 성능·파레토 참고 |
-| [docs/usage/](docs/usage/) | 사용량·토큰·가격 실측 |
+| [docs/sessions/](docs/sessions/) | Hermes 세션 export |
 
 ## 관심사 분리
 

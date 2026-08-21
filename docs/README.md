@@ -8,6 +8,7 @@ VenGlyph 제품/아키텍처 문서와, 개인 비서(관제) 제작에 쓰는 �
 | [`notes/google-ai/`](./notes/google-ai/) | 설계 탐색 Q&A (Hermes/IDE, 런타임, 라우팅, LangChain) |
 | [`benchmarks/`](./benchmarks/) | LLM 파레토·에이전틱 코딩 벤치 분석 |
 | [`usage/`](./usage/) | Cursor 등 사용량·토큰·가격 실측 |
+| [`sessions/`](./sessions/) | Hermes 등 에이전트 세션 export |
 
 형제 레포 `one-min-mcp`에는 1min API·게이트웨이·Hermes 운영 문서가 있다 (프로바이더/어댑터 관심사).
 
@@ -20,3 +21,4 @@ VenGlyph 제품/아키텍처 문서와, 개인 비서(관제) 제작에 쓰는 �
 | [benchmarks/](./benchmarks/) | 벤치마크 md + `data/` |
 | [usage/cursor-usage-tokens.md](./usage/cursor-usage-tokens.md) | Cursor 토큰 사용 |
 | [usage/data/dgpuass-prices.csv](./usage/data/dgpuass-prices.csv) | 가격 스냅샷 |
+| [sessions/](./sessions/) | Hermes 세션 덤프 |
