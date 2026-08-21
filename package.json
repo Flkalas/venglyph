@@ -1,0 +1,32 @@
+{
+  "name": "venglyph",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "VenGlyph personal LLM work hub — control plane, worker, CLI",
+  "bin": {
+    "venglyph": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev:hub": "tsx src/cli.ts hub server",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test src/**/*.test.ts",
+    "start:hub": "node dist/cli.js hub server"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "hono": "^4.8.3",
+    "ws": "^8.18.3",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.14",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

@@ -3,8 +3,11 @@ dist/
 .env
 .env.*
 !.env.example
+data/
 *.db
 *.db-*
+*.sqlite
+*.sqlite-*
 .DS_Store
 Thumbs.db
 *.log

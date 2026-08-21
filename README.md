@@ -22,4 +22,36 @@
 
 ## 상태
 
-설계·벤치·사용량 문서 이관 완료. 구현은 제어평면 계획서 M0부터.
+제어평면 M0+M1 구현 중 (`feat/control-plane`). 설계·벤치·사용량 문서는 `docs/` 참고.
+
+## 실행 (Hub)
+
+요구: Node 24+, pnpm, 로컬 llmster/LM Studio (`HUB_LLM_BASE_URL`).
+
+```powershell
+pnpm install
+copy .env.example .env   # 필요 시 수정
+pnpm dev:hub             # http://127.0.0.1:8787
+# 다른 터미널
+pnpm exec venglyph hub worker --workspace .
+pnpm exec venglyph hub chat "README 첫 줄 알려줘"
+```
+
+| 스크립트 | 역할 |
+| --- | --- |
+| `pnpm dev:hub` | Hub HTTP 서버 (tsx) |
+| `pnpm typecheck` | TypeScript 검사 |
+| `pnpm test` | `node:test` (dangerGate 등) |
+
+## 환경 변수
+
+| 키 | 기본 | 설명 |
+| --- | --- | --- |
+| `HUB_PORT` | `8787` | Hub HTTP 포트 |
+| `HUB_HOST` | `127.0.0.1` | bind 주소 |
+| `HUB_DB_PATH` | `./data/hub.db` | SQLite WAL 파일 |
+| `HUB_WORKER_TOKEN` | (example) | Worker `hello` 공유 비밀 |
+| `HUB_FA` | `0` | `1`이면 confirm만 자동 승인 (deny 불가) |
+| `HUB_LLM_BASE_URL` | `http://127.0.0.1:1234/v1` | llmster OpenAI 호환 |
+| `HUB_LLM_MODEL` | `qwen/qwen3.5-9b` | 기본 chat 모델 |
+| `HUB_LLM_CODE_MODEL` | (같음) | code 힌트 시 모델 id |
