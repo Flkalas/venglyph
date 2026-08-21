@@ -18,6 +18,7 @@
 | --- | --- |
 | **venglyph** (여기) | 관제 · Store · Worker · 채널 스킨 · 벤치/비용 참고 |
 | `one-min-mcp` | 1min.ai MCP · OpenAI 호환 게이트웨이 · tools protocol |
+| `hermes-ops` | Hermes / OpenRouter / LM Studio 호스트 운영 |
 
 ## 상태
 
