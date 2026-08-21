@@ -13,3 +13,5 @@ Thumbs.db
 *.log
 .turbo/
 coverage/
+
+tmp-accept/
