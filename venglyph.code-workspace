@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../one-min-mcp"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../hermes-ops"
+		}
+	],
+	"settings": {}
+}
