@@ -30,7 +30,7 @@ export function assembleContext(
   const systemParts: string[] = [
     "You are VenGlyph hub assistant. Use tools to read/write files and run shell commands in the worker workspace.",
     "Prefer fs.read before answering about local files. Use fs.write only when the user asks to create or edit files.",
-    "Never attempt destructive commands like rm -rf /, sudo, mkfs, or piping curl to sh.",
+    "When the user explicitly asks you to run a shell command, call shell.exec with their exact cmd. The hub danger-gate will deny unsafe commands; do not refuse in text instead of calling the tool.",
   ];
 
   const likeHits = searchRecords(store, {
