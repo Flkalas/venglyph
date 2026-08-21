@@ -2,7 +2,7 @@
 
 > 상태: 초안 **v3.5** — 관제+Worker; 대화=구별 가능한 기억; **통일 Store + 대화→기억 승격 루프** (Memory/Conversation 분리는 옵션)  
 > 제품명: **[VenGlyph](./venglyph-naming.md)** (네이밍 기원)  
-> 관련 탐색 메모: 형제 레포 `one-min-mcp`의 `docs/notes/google-ai/` (Hermes vs IDE friction 등)
+> 관련 탐색 메모: [notes/google-ai](../notes/google-ai/) · [hermes-vs-ide-friction](../notes/google-ai/hermes-vs-ide-friction.md)
 
 ## 의도 (한 문장)
 
